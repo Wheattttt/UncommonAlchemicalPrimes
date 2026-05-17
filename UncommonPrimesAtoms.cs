@@ -1,19 +1,15 @@
 ﻿using Brimstone;
 using Quintessential;
+using Texture = class_256;
 
 namespace UncommonPrimes;
 
 public static class UncommonPrimesAtoms
 {
     public static AtomType Bellum, Obscurum, Lux, Pax;
-
     public static void AddAtomTypes()
     {
-
-        // Replace the vanilla periodic table
-        //class_238.field_1989.field_91.field_799 = Brimstone.API.GetTexture("textures/periodic_table/background");
-
-        // Composite Cardinals
+        // Ordinals
         Bellum = Brimstone.API.CreateCardinalAtom(
             ID: 190, 
             modName: "UncommonPrimes",

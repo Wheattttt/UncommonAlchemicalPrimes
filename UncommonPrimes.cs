@@ -10,11 +10,6 @@ using System.Drawing;
 using System.Linq;
 using System.Numerics;
 using System.Reflection;
-using AtomTypes = class_175;
-using BondStyle = class_200;
-using BondType = enum_126;
-using PartType = class_139;
-using PartTypes = class_191;
 using Permissions = enum_149;
 using Texture = class_256;
 
@@ -22,33 +17,23 @@ namespace UncommonPrimes;
 
 public class UncommonPrimes : QuintessentialMod
 {
-    //drawing helpers
+    // Drawing helpers, stolen from RM
     public static Vector2 hexGraphicalOffset(HexIndex hex) => class_187.field_1742.method_492(hex);
 
-    public static Texture[] fetchTextureArray(int length, string path)
-    {
-        var ret = new Texture[length];
-        for (int i = 0; i < ret.Length; i++)
-        {
-            ret[i] = class_235.method_615(path + (i + 1).ToString("0000"));
-        }
-        return ret;
-    }
     public static string contentPath;
-
     public override void Load()
     {
-        Quintessential.Logger.Log("UP - Uncommon Primes Registered");
+        Quintessential.Logger.Log("[UncommonAlchemicalPrimes] Registered");
     }
     public override void Unload()
     {
-        Quintessential.Logger.Log("UP - Uncommon Primes Unloaded");
+        Quintessential.Logger.Log("[UncommonAlchemicalPrimes] Unloaded");
+        On.class_177.method_50 -= OnMethod50;
         Sounds.Unload();
     }
-
     public override void LoadPuzzleContent()
     {
-        Quintessential.Logger.Log("UP - Uncommon Primes Loading");
+        Quintessential.Logger.Log("[UncommonAlchemicalPrimes] Uncommon Primes Loading");
         UncommonPrimesAtoms.AddAtomTypes();
         UncommonPrimesParts.AddPartTypes();
         Wheel_Servin.LoadContent();
@@ -56,10 +41,10 @@ public class UncommonPrimes : QuintessentialMod
         contentPath = Brimstone.API.GetContentPath("UncommonPrimes").method_1087();
         Sounds.LoadSounds();
         API.AddTransmutations();
-        QApi.AddPuzzlePermission("UncommonPrimes: Similarity", "Glyph of Similarity", "Uncommon Primes");
-        QApi.AddPuzzlePermission("UncommonPrimes: Servin's Wheel", "Servin's Wheel", "Uncommon Primes");
+        QApi.AddPuzzlePermission("UncommonPrimes: Similarity", "Glyph of Similarity", "Uncommon Alchemical Primes");
+        QApi.AddPuzzlePermission("UncommonPrimes: Servin's Wheel", "Servin's Wheel", "Uncommon Alchemical Primes");
         //QApi.AddPuzzlePermission("UncommonPrimes: Mutable Van Berlo's Wheel", "Mutable Van Berlo's Wheel", "Uncommon Primes");
-        Quintessential.Logger.Log("UP - Uncommon Primes Loaded");
+        Quintessential.Logger.Log("[UncommonAlchemicalPrimes] Loaded");
         //------------------------- WHEEL HOOKING, stolen from RM -------------------------//
         IL.SolutionEditorBase.method_1984 += drawWheelAtoms;
     }
@@ -93,9 +78,28 @@ public class UncommonPrimes : QuintessentialMod
         });
     }
 
+    public static Texture periodicTableOverlay;
     public override void PostLoad()
     {
+        periodicTableOverlay = Brimstone.API.GetTexture("textures/periodic_table/UncommonPrimes/overlay");
         On.SolutionEditorBase.method_1997 += DrawPartSelectionGlows;
+        On.class_177.method_50 += OnMethod50;
+    }
+
+    //Modify Periodic Table
+    private static void OnMethod50(
+    On.class_177.orig_method_50 orig,
+    class_177 self,
+    float param_3780)
+    {
+        orig(self, param_3780);
+        Vector2 vector = new Vector2(1516f, 922f);
+        Vector2 vector2 = (class_115.field_1433 / 2 - vector / 2 + new Vector2(-2f, -11f)).Rounded();
+        class_135.method_272(periodicTableOverlay, vector2 + new Vector2(83f, 94f));
+        class_135.method_290("_Bellum_", vector2 + new Vector2(658f, 575f), class_238.field_1990.field_2151, DocumentScreen.field_2410, (enum_0)1, 1f, 0.6f, float.MaxValue, float.MaxValue, 0, default(Color), null, int.MaxValue, param_3473: false, param_3474: true);
+        class_135.method_290("_Obscurum_", vector2 + new Vector2(860f, 575f), class_238.field_1990.field_2151, DocumentScreen.field_2410, (enum_0)1, 1f, 0.6f, float.MaxValue, float.MaxValue, 0, default(Color), null, int.MaxValue, param_3473: false, param_3474: true);
+        class_135.method_290("_Lux_", vector2 + new Vector2(658f, 378f), class_238.field_1990.field_2151, DocumentScreen.field_2410, (enum_0)1, 1f, 0.6f, float.MaxValue, float.MaxValue, 0, default(Color), null, int.MaxValue, param_3473: false, param_3474: true);
+        class_135.method_290("_Pax_", vector2 + new Vector2(860f, 378f), class_238.field_1990.field_2151, DocumentScreen.field_2410, (enum_0)1, 1f, 0.6f, float.MaxValue, float.MaxValue, 0, default(Color), null, int.MaxValue, param_3473: false, param_3474: true);
     }
 
     public void DrawPartSelectionGlows(On.SolutionEditorBase.orig_method_1997 orig, SolutionEditorBase seb_self, Part part, Vector2 pos, float alpha)

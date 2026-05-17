@@ -67,7 +67,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy /Y &quot;E:\OMmodding\UncommonPrimes\bin\Debug\net46\UncommonPrimes.dll&quot; &quot;E:\OMmodding\Opus Magnum\Mods\UncommonPrimes\UncommonPrimes.dll&quot; &amp;&amp; cd /d &quot;E:\OMmodding\Opus Magnum&quot; &amp;&amp; ModdedLightning.exe" />
+    <Exec Command="copy /Y &quot;E:\OMmodding\UncommonPrimes\bin\Debug\net46\UncommonPrimes.dll&quot; &quot;E:\OMmodding\Opus Magnum\Mods\UncommonAlchemicalPrimes\UncommonPrimes.dll&quot; &amp;&amp; cd /d &quot;E:\OMmodding\Opus Magnum&quot; &amp;&amp; ModdedLightning.exe" />
   </Target>
 
 </Project>
