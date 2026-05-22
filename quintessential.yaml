@@ -1,11 +1,14 @@
 Name: UncommonPrimes
-Version: 0.0.1
+Version: 0.0.0
 Icon: up_icon
 Title: "Uncommon Alchemical Primes"
-Desc: Adds multiple new composite cardinals (The Ordinals), and glyphs to transmute them.
+Desc: Adds the Ordinals (cardinal-likes) and Second-Order Metals, alongside glyphs to access them.
 DLL: "UncommonPrimes.dll"
 Dependences:
 - Name: Quintessential
   Version: 0.5.1
 - Name: Brimstone
   Version: 2.0.2
+OptionalDependencies:
+- Name: ReductiveMetallurgy
+  Version: 1.0.1

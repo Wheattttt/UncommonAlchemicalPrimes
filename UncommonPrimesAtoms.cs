@@ -6,7 +6,7 @@ namespace UncommonPrimes;
 
 public static class UncommonPrimesAtoms
 {
-    public static AtomType Bellum, Obscurum, Lux, Pax;
+    public static AtomType Bellum, Obscurum, Lux, Pax, Zinc, Nickel, Bismuth, Cobalt, Platinum;
     public static void AddAtomTypes()
     {
         // Ordinals
@@ -51,10 +51,61 @@ public static class UncommonPrimesAtoms
             pathToRim: "textures/atoms/UncommonPrimes/fog"
         );
 
+        // Add second-order metals (In reverse order, as promotesTo can only reference already existing atoms)
+        Platinum = Brimstone.API.CreateMetalAtom(
+            ID: 160,
+            modName: "UncommonPrimes",
+            name: "Platinum",
+            pathToSymbol: "textures/atoms/UncommonPrimes/metals/platinum_symbol",
+            pathToLightramp: "textures/atoms/UncommonPrimes/metals/platinum_lightramp",
+            pathToRimlight: "textures/atoms/UncommonPrimes/metals/platinum_rimlight"
+        );
+        Cobalt = Brimstone.API.CreateMetalAtom(
+            ID: 159,
+            modName: "UncommonPrimes",
+            name: "Cobalt",
+            pathToSymbol: "textures/atoms/UncommonPrimes/metals/cobalt_symbol",
+            pathToLightramp: "textures/atoms/UncommonPrimes/metals/cobalt_lightramp",
+            pathToRimlight: "textures/atoms/UncommonPrimes/metals/cobalt_rimlight",
+            promotesTo: Platinum
+        );
+        Bismuth = Brimstone.API.CreateMetalAtom(
+            ID: 158,
+            modName: "UncommonPrimes",
+            name: "Bismuth",
+            pathToSymbol: "textures/atoms/UncommonPrimes/metals/bismuth_symbol",
+            pathToLightramp: "textures/atoms/UncommonPrimes/metals/bismuth_lightramp",
+            pathToRimlight: "textures/atoms/UncommonPrimes/metals/bismuth_rimlight",
+            promotesTo: Cobalt
+        );
+        Nickel = Brimstone.API.CreateMetalAtom(
+            ID: 157,
+            modName: "UncommonPrimes",
+            name: "Nickel",
+            pathToSymbol: "textures/atoms/UncommonPrimes/metals/nickel_symbol",
+            pathToLightramp: "textures/atoms/UncommonPrimes/metals/nickel_lightramp",
+            pathToRimlight: "textures/atoms/UncommonPrimes/metals/nickel_rimlight",
+            promotesTo: Bismuth
+        );
+        Zinc = Brimstone.API.CreateMetalAtom(
+            ID: 156,
+            modName: "UncommonPrimes",
+            name: "Zinc",
+            pathToSymbol: "textures/atoms/UncommonPrimes/metals/zinc_symbol",
+            pathToLightramp: "textures/atoms/UncommonPrimes/metals/zinc_lightramp",
+            pathToRimlight: "textures/atoms/UncommonPrimes/metals/zinc_rimlight",
+            promotesTo: Nickel
+        );
+
         QApi.AddAtomType(Bellum);
         QApi.AddAtomType(Obscurum);
         QApi.AddAtomType(Lux);
         QApi.AddAtomType(Pax);
+        QApi.AddAtomType(Zinc);
+        QApi.AddAtomType(Nickel);
+        QApi.AddAtomType(Bismuth);
+        QApi.AddAtomType(Cobalt);
+        QApi.AddAtomType(Platinum);
 
     }
 }

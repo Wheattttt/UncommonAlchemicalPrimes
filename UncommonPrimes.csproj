@@ -37,6 +37,9 @@
     <Reference Include="MonoMod.Utils">
       <HintPath>E:\OMmodding\Opus Magnum\MonoMod.Utils.dll</HintPath>
     </Reference>
+	<Reference Include="ReductiveMetallurgy">
+	  <HintPath>..\Opus Magnum\Mods\ReductiveMetallurgy_1.0.1\ReductiveMetallurgy.dll</HintPath>
+	</Reference>
     <Reference Include="YamlDotNet">
       <HintPath>E:\OMmodding\Opus Magnum\YamlDotNet.dll</HintPath>
     </Reference>
