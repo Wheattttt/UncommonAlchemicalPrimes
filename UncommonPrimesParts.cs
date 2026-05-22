@@ -94,8 +94,8 @@ internal static class UncommonPrimesParts
     public static Texture similarityTop = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/similarity/top");
     public static Texture[] similarityFlashAnimation = Brimstone.API.GetAnimation("textures/parts/UncommonPrimes/similarity_glyph_flash.array", "projection_glyph", 10);
 
-    public static Texture similarityIcon = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/similarity/base");
-    public static Texture similarityHover = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/similarity/base");
+    public static Texture similarityIcon = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/icons/similarity");
+    public static Texture similarityHover = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/icons/similarity_hover");
 
     public static readonly HexIndex similarityInput1 = new(0, 0);
     public static readonly HexIndex similarityInput2 = new(1, 0);
