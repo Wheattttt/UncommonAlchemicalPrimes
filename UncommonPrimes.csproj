@@ -40,6 +40,9 @@
 	<Reference Include="ReductiveMetallurgy">
 	  <HintPath>..\Opus Magnum\Mods\ReductiveMetallurgy_1.0.1\ReductiveMetallurgy.dll</HintPath>
 	</Reference>
+	<Reference Include="TrueAnimismus">
+	  <HintPath>..\Opus Magnum\DisabledMods\TrueAn_1.0.5\TrueAn.dll</HintPath>
+	</Reference>
     <Reference Include="YamlDotNet">
       <HintPath>E:\OMmodding\Opus Magnum\YamlDotNet.dll</HintPath>
     </Reference>

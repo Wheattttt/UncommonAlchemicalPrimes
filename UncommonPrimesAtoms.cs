@@ -6,7 +6,7 @@ namespace UncommonPrimes;
 
 public static class UncommonPrimesAtoms
 {
-    public static AtomType Bellum, Obscurum, Lux, Pax, Zinc, Nickel, Bismuth, Cobalt, Platinum;
+    public static AtomType Bellum, Obscurum, Lux, Pax, Zinc, Nickel, Bismuth, Cobalt, Platinum, Muto, PaleMuto, TrueMuto, Fixus, DarkFixus, TrueFixus;
     public static void AddAtomTypes()
     {
         // Ordinals
@@ -97,15 +97,85 @@ public static class UncommonPrimesAtoms
             promotesTo: Nickel
         );
 
-        QApi.AddAtomType(Bellum);
-        QApi.AddAtomType(Obscurum);
-        QApi.AddAtomType(Lux);
-        QApi.AddAtomType(Pax);
-        QApi.AddAtomType(Zinc);
-        QApi.AddAtomType(Nickel);
-        QApi.AddAtomType(Bismuth);
-        QApi.AddAtomType(Cobalt);
-        QApi.AddAtomType(Platinum);
+        // Add Fluxismus
+        Muto = Brimstone.API.CreateNormalAtom(
+            ID: 194,
+            modName: "UncommonPrimes",
+            name: "Muto",
+            pathToSymbol: "textures/atoms/UncommonPrimes/fluxismus/muto_symbol",
+            pathToDiffuse: "textures/atoms/UncommonPrimes/fluxismus/muto_diffuse",
+            pathToShade: "textures/atoms/UncommonPrimes/fluxismus/muto_shade"
+        );
+        PaleMuto = Brimstone.API.CreateNormalAtom(
+            ID: 195,
+            modName: "UncommonPrimes",
+            name: "Muto",
+            pathToSymbol: "textures/atoms/UncommonPrimes/fluxismus/trueancompat/pale_muto_symbol",
+            pathToDiffuse: "textures/atoms/UncommonPrimes/fluxismus/trueancompat/pale_muto_diffuse",
+            pathToShade: "textures/atoms/UncommonPrimes/fluxismus/trueancompat/pale_muto_shade"
+        );
+        TrueMuto = Brimstone.API.CreateNormalAtom(
+            ID: 196,
+            modName: "UncommonPrimes",
+            name: "Muto",
+            pathToSymbol: "textures/atoms/UncommonPrimes/fluxismus/trueancompat/true_muto_symbol",
+            pathToDiffuse: "textures/atoms/UncommonPrimes/fluxismus/trueancompat/true_muto_diffuse",
+            pathToShade: "textures/atoms/UncommonPrimes/fluxismus/trueancompat/true_muto_shade"
+        );
+        Fixus = Brimstone.API.CreateNormalAtom(
+            ID: 197,
+            modName: "UncommonPrimes",
+            name: "Fixus",
+            pathToSymbol: "textures/atoms/UncommonPrimes/fluxismus/fixus_symbol",
+            pathToDiffuse: "textures/atoms/UncommonPrimes/fluxismus/fixus_diffuse",
+            pathToShade: "textures/atoms/UncommonPrimes/fluxismus/fixus_shade"
+        );
+        DarkFixus = Brimstone.API.CreateNormalAtom(
+            ID: 198,
+            modName: "UncommonPrimes",
+            name: "Fixus",
+            pathToSymbol: "textures/atoms/UncommonPrimes/fluxismus/trueancompat/dark_fixus_symbol",
+            pathToDiffuse: "textures/atoms/UncommonPrimes/fluxismus/trueancompat/dark_fixus_diffuse",
+            pathToShade: "textures/atoms/UncommonPrimes/fluxismus/trueancompat/dark_fixus_shade"
+        );
+        TrueFixus = Brimstone.API.CreateNormalAtom(
+            ID: 199,
+            modName: "UncommonPrimes",
+            name: "Fixus",
+            pathToSymbol: "textures/atoms/UncommonPrimes/fluxismus/trueancompat/true_fixus_symbol",
+            pathToDiffuse: "textures/atoms/UncommonPrimes/fluxismus/trueancompat/true_fixus_diffuse",
+            pathToShade: "textures/atoms/UncommonPrimes/fluxismus/trueancompat/true_fixus_shade"
+        );
 
+        if (API.OrdinalsEnabled == true) // Only add the ordinals to the editor if enabled in the API
+        {
+            QApi.AddAtomType(Bellum);
+            QApi.AddAtomType(Obscurum);
+            QApi.AddAtomType(Lux);
+            QApi.AddAtomType(Pax);
+        }
+        if (API.SecondOrderMetalsEnabled == true) // Same for metals
+        {
+            QApi.AddAtomType(Zinc);
+            QApi.AddAtomType(Nickel);
+            QApi.AddAtomType(Bismuth);
+            QApi.AddAtomType(Cobalt);
+            QApi.AddAtomType(Platinum);
+        }
+        if (API.FluxismusEnabled == true) // Same for fluxismus
+        {
+            QApi.AddAtomType(Muto);
+            if (UncommonPrimes.TrueAnimismusLoaded) // Additionally, if True Animismus is installed, add Colored and True versions of Muto
+            {
+                QApi.AddAtomType(PaleMuto);
+                QApi.AddAtomType(TrueMuto);
+            }
+            QApi.AddAtomType(Fixus);
+            if (UncommonPrimes.TrueAnimismusLoaded) // Same for Fixus
+            {
+                QApi.AddAtomType(DarkFixus);
+                QApi.AddAtomType(TrueFixus);
+            }
+        }
     }
 }

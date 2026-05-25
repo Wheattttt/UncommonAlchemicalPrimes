@@ -82,12 +82,13 @@ internal static class UncommonPrimesParts
 
 
 
-    public static PartType Similarity, Osmosis, Dissolution;
+    public static PartType Similarity, Stability, Osmosis, Dissolution, Fluxismus;
 
     public static Texture bowl = class_238.field_1989.field_90.field_170;
     public static Texture metalBowl = class_238.field_1989.field_90.field_255.field_292;
     public static Texture[] glyphFlashAnimation = Brimstone.API.GetAnimation("textures/parts/UncommonPrimes/glyph_flash.array", "flash", 10);
     public static Texture calcSymbol = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/similarity/symbols");
+    public static Texture ordinalSymbol = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/stability/ordinals_symbol");
 
     //Similarity
     public static Texture similarityBase = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/similarity/base");
@@ -100,6 +101,16 @@ internal static class UncommonPrimesParts
     public static readonly HexIndex similarityInput1 = new(0, 0);
     public static readonly HexIndex similarityInput2 = new(1, 0);
     public static readonly HexIndex similarityOutput = new(0, 1);
+
+    //Stability
+    public static Texture stabilityBase = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/stability/base");
+    public static Texture stabilityTop = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/stability/top");
+
+    public static Texture stabilityIcon = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/icons/similarity");
+    public static Texture stabilityHover = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/icons/similarity_hover");
+
+    public static readonly HexIndex stabilityOrdinal1Hex = new(0, 0);
+    public static readonly HexIndex stabilityOrdinal2Hex = new(1, 0);
 
     //Osmosis
     public static Texture osmosisBase = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/osmosis/base");
@@ -145,13 +156,35 @@ internal static class UncommonPrimesParts
     public static readonly HexIndex dissolutionOutputHigh = new(1, 1);
     public static readonly HexIndex dissolutionOutputLow = new(-1, 1);
 
+    //Fluxismus
+    public static Texture fluxismusBase = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/fluxismus/base");
+    public static Texture fluxismusBottom = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/fluxismus/bottom");
+    public static Texture fluxismusTop = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/fluxismus/top");
+    public static Texture fluxismusGlossmask = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/fluxismus/gloss_mask");
+    public static Texture fluxismusGloss = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/fluxismus/gloss");
+
+    public static Texture fluxismusGlow = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/select/fluxismus_glow");
+    public static Texture fluxismusStroke = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/select/fluxismus_stroke");
+    public static Texture qsSymbol = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/fluxismus/quicksilver_symbol");
+
+    public static Texture fluxismusIcon = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/icons/fluxismus");
+    public static Texture fluxismusHover = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/icons/fluxismus_hover");
+
+    public static Texture[] irisMuto = Brimstone.API.GetAnimation("textures/parts/UncommonPrimes/iris_full_muto.array", "iris", 16);
+    public static Texture[] irisFixus = Brimstone.API.GetAnimation("textures/parts/UncommonPrimes/iris_full_fixus.array", "iris", 16);
+
+    public static readonly HexIndex fluxismusInput1 = new(0, 0);
+    public static readonly HexIndex fluxismusInput2 = new(1, 0);
+    public static readonly HexIndex fluxismusOutputMuto = new(1, 1);
+    public static readonly HexIndex fluxismusOutputFixus = new(0, -1);
+
     public static void AddPartTypes()
     {
         Similarity = new()
         {
             field_1528 = "uncommon-primes-similarity", // ID
             field_1529 = class_134.method_253("Glyph of Similarity", string.Empty), // Name
-            field_1530 = class_134.method_253("The glyph of Similarity transmutes a salt atom into any of the ordinals, based on the two input cardinals.", string.Empty), // Description
+            field_1530 = class_134.method_253("The glyph of similarity transmutes a salt atom into any of the ordinals, based on the two input cardinals.", string.Empty), // Description
             field_1531 = 20, // Cost
             field_1539 = true, // Is a glyph
             field_1549 = class_238.field_1989.field_97.field_386,// triple_glow
@@ -179,11 +212,41 @@ internal static class UncommonPrimesParts
 
             renderer.method_523(similarityTop, Vector2.Zero, offset, 0f);
         });
+        Stability = new()
+        {
+            field_1528 = "uncommon-primes-stability", // ID
+            field_1529 = class_134.method_253("Glyph of Stability", string.Empty), // Name
+            field_1530 = class_134.method_253("The glyph of stability takes two ordinals, converting them into their shared cardinal.", string.Empty), // Description
+            field_1531 = 20, // Cost
+            field_1539 = true, // Is a glyph
+            field_1549 = class_238.field_1989.field_97.field_374,// double_glow
+            field_1550 = class_238.field_1989.field_97.field_375, // double_stroke
+            field_1547 = stabilityIcon, // Panel icon
+            field_1548 = stabilityHover, // Hovered panel icon
+            field_1540 = new HexIndex[]
+            {
+                stabilityOrdinal1Hex,
+                stabilityOrdinal2Hex
+            },
+            field_1551 = Permissions.None,
+            CustomPermissionCheck = perms => perms.Contains("UncommonPrimes: Stability")
+        };
+        QApi.AddPartType(Stability, static (part, pos, editor, renderer) =>
+        {
+            Vector2 offset = new(42f, 48f);
+            renderer.method_523(stabilityBase, Vector2.Zero, offset, 0f);
+            renderer.method_528(bowl, stabilityOrdinal1Hex, Vector2.Zero);
+            renderer.method_528(bowl, stabilityOrdinal2Hex, Vector2.Zero);
+            renderer.method_529(ordinalSymbol, stabilityOrdinal1Hex, Vector2.Zero);
+            renderer.method_529(ordinalSymbol, stabilityOrdinal2Hex, Vector2.Zero);
+
+            renderer.method_523(stabilityTop, Vector2.Zero, offset, 0f);
+        });
         Osmosis = new()
         {
             field_1528 = "uncommon-primes-osmosis", // ID
             field_1529 = class_134.method_253("Glyph of Osmosis", string.Empty), // Name
-            field_1530 = class_134.method_253("The glyph of Osmosis accepts two adjacent metals, equalizing them to their opposite-order product. ", string.Empty), // Description
+            field_1530 = class_134.method_253("The glyph of osmosis accepts two adjacent metals, equalizing them to their opposite-order product. ", string.Empty), // Description
             field_1531 = 20, // Cost
             field_1539 = true, // Is a glyph
             field_1549 = osmosisGlow,
@@ -247,7 +310,7 @@ internal static class UncommonPrimesParts
         {
             field_1528 = "uncommon-primes-dissolution", // ID
             field_1529 = class_134.method_253("Glyph of Dissolution", string.Empty), // Name
-            field_1530 = class_134.method_253("The glyph of Dissolution accepts two of the same metal, diverging them to their nearest opposite-order pair. ", string.Empty), // Description
+            field_1530 = class_134.method_253("The glyph of dissolution accepts two of the same metal, diverging them to their nearest opposite-order pair. ", string.Empty), // Description
             field_1531 = 20, // Cost
             field_1539 = true, // Is a glyph
             field_1549 = dissolutionGlow,
@@ -307,11 +370,76 @@ internal static class UncommonPrimesParts
                 Editor.method_925(risingMetal2, risingOffset2, new HexIndex(0, 0), 0f, 1f, time, 1f, false, null);
             }
         });
+        Fluxismus = new()
+        {
+            field_1528 = "uncommon-primes-fluxismus", // ID
+            field_1529 = class_134.method_253("Glyph of Fluxismus", string.Empty), // Name
+            field_1530 = class_134.method_253("The glyph of fluxismus transmutes two atoms of quicksilver into one atom of muto and one atom of fixus. ", string.Empty), // Description
+            field_1531 = 20, // Cost
+            field_1539 = true, // Is a glyph
+            field_1549 = fluxismusGlow,
+            field_1550 = fluxismusStroke,
+            field_1547 = fluxismusIcon, // Panel icon
+            field_1548 = fluxismusHover, // Hovered panel icon
+            field_1540 = new HexIndex[]
+        {
+                fluxismusInput1,
+                fluxismusInput2,
+                fluxismusOutputMuto,
+                fluxismusOutputFixus
+        },
+            field_1551 = Permissions.None,
+            CustomPermissionCheck = perms => perms.Contains("UncommonPrimes: Fluxismus")
+        };
+        QApi.AddPartType(Fluxismus, static (part, pos, editor, renderer) =>
+        {
+            PartSimState pss = editor.method_507().method_481(part);
+            class_236 uco = editor.method_1989(part, pos);
+            float time = editor.method_504();
+
+            Vector2 offset = new(164f, 120f);
+            renderer.method_523(fluxismusBase, Vector2.Zero, offset, 0f);
+            renderer.method_523(fluxismusBottom, Vector2.Zero, offset, 0f);
+
+            int irisFrame = 15;
+            bool afterIrisOpens = false;
+            Molecule risingMetal1 = null;
+            Molecule risingMetal2 = null;
+            Vector2 risingOffset1 = uco.field_1984 + class_187.field_1742.method_492(fluxismusOutputFixus).Rotated(uco.field_1985);
+            Vector2 risingOffset2 = uco.field_1984 + class_187.field_1742.method_492(fluxismusOutputMuto).Rotated(uco.field_1985);
+            if (pss.field_2743)
+            {
+                irisFrame = class_162.method_404((int)(class_162.method_411(1f, -1f, time) * 16f), 0, 15);
+                afterIrisOpens = time > 0.5f;
+                risingMetal1 = Molecule.method_1121(pss.field_2744[0]);
+                risingMetal2 = Molecule.method_1121(pss.field_2744[1]);
+                if (!afterIrisOpens)
+                {
+                    // show atom rising behind iris
+                    Editor.method_925(risingMetal1, risingOffset1, new HexIndex(0, 0), 0f, 1f, time, 1f, false, null);
+                    Editor.method_925(risingMetal2, risingOffset2, new HexIndex(0, 0), 0f, 1f, time, 1f, false, null);
+                }
+            }
+            renderer.method_529(irisMuto[irisFrame], fluxismusOutputMuto, Vector2.Zero); //Render Iris
+            renderer.method_529(irisFixus[irisFrame], fluxismusOutputFixus, Vector2.Zero); //Render Iris
+            renderer.method_523(fluxismusTop, Vector2.Zero, offset, 0f);
+            renderer.method_529(qsSymbol, fluxismusInput1, Vector2.Zero);
+            renderer.method_529(qsSymbol, fluxismusInput2, Vector2.Zero);
+            drawPartGloss(renderer, fluxismusGloss, fluxismusGlossmask, offset);
+            if (pss.field_2743 && afterIrisOpens)
+            {
+                // show atom rising infront of iris
+                Editor.method_925(risingMetal1, risingOffset1, new HexIndex(0, 0), 0f, 1f, time, 1f, false, null);
+                Editor.method_925(risingMetal2, risingOffset2, new HexIndex(0, 0), 0f, 1f, time, 1f, false, null);
+            }
+        });
 
 
         QApi.AddPartTypeToPanel(Similarity, false);
+        QApi.AddPartTypeToPanel(Stability, false);
         QApi.AddPartTypeToPanel(Osmosis, false);
         QApi.AddPartTypeToPanel(Dissolution, false);
+        QApi.AddPartTypeToPanel(Fluxismus, false);
 
         QApi.RunAfterCycle((sim, first) => {
             var seb = sim.field_3818;
@@ -345,6 +473,29 @@ internal static class UncommonPrimesParts
                                 Brimstone.API.ChangeAtom(atomOutput, recipe.output);
                                 atomOutput.field_2279.field_2276 = new class_168(seb, 0, (enum_132)1, atomOutput.field_2280, class_238.field_1989.field_81.field_614, 30f);
                                 seb.field_3935.Add(new class_228(seb, (enum_7)1, class_187.field_1742.method_492(part.method_1184(similarityOutput)), similarityFlashAnimation, 30f, Vector2.Zero, partInfo.field_1985));
+                                Brimstone.API.PlaySound(sim, Sounds.Similarity);
+                                break;
+
+                            }
+                        }
+                    }
+                }
+                else if (type == Stability)
+                {
+                    bool ordinal1 = maybeFindAtom(part, stabilityOrdinal1Hex, new List<Part>(), true).method_99(out AtomReference OrdinalAtom1);
+                    bool ordinal2 = maybeFindAtom(part, stabilityOrdinal2Hex, new List<Part>(), true).method_99(out AtomReference OrdinalAtom2);
+                    if (ordinal1 && ordinal2)
+                    {
+                        //check atom type
+                        foreach (API.StabilityRecipe recipe in API.StabilityTransmutation)
+                        {
+                            if ((recipe.ordinalinput1 == (OrdinalAtom1.field_2280)) && (recipe.ordinalinput2 == (OrdinalAtom2.field_2280)))
+                            {
+                                Brimstone.API.ChangeAtom(OrdinalAtom1, recipe.output);
+                                OrdinalAtom1.field_2279.field_2276 = new class_168(seb, 0, (enum_132)1, OrdinalAtom1.field_2280, class_238.field_1989.field_81.field_614, 30f);
+                                Brimstone.API.ChangeAtom(OrdinalAtom2, recipe.output);
+                                OrdinalAtom2.field_2279.field_2276 = new class_168(seb, 0, (enum_132)1, OrdinalAtom2.field_2280, class_238.field_1989.field_81.field_614, 30f);
+                                //seb.field_3935.Add(new class_228(seb, (enum_7)1, class_187.field_1742.method_492(part.method_1184(similarityOutput)), similarityFlashAnimation, 30f, Vector2.Zero, partInfo.field_1985));
                                 Brimstone.API.PlaySound(sim, Sounds.Similarity);
                                 break;
 
@@ -430,6 +581,46 @@ internal static class UncommonPrimesParts
                     {
                         Brimstone.API.AddAtom(sim, part, dissolutionOutputLow, pss.field_2744[0]);
                         Brimstone.API.AddAtom(sim, part, dissolutionOutputHigh, pss.field_2744[1]);
+                    }
+                }
+                else if (type == Fluxismus)
+                {
+                    if (first)
+                    {
+                        // Do atoms exist
+                        if ((sim.FindAtomRelative(part, dissolutionInput1).method_99(out AtomReference Input1)) && (sim.FindAtomRelative(part, dissolutionInput2).method_99(out AtomReference Input2)))
+                        {
+                            if ((!sim.FindAtomRelative(part, dissolutionOutputHigh).method_1085()) && (!sim.FindAtomRelative(part, dissolutionOutputLow).method_1085()))
+                            {
+                                // if atom isn't being held or consumed
+                                if (!Input1.field_2281 && !Input1.field_2282 && !Input2.field_2281 && !Input2.field_2282)
+                                {
+
+                                    //check atom type
+                                    foreach (API.FluxismusRecipe recipe in API.FluxismusTransmutation)
+                                    {
+                                        if (recipe.input == (Input1.field_2280) && recipe.input == (Input2.field_2280))
+                                        {
+                                            Brimstone.API.RemoveAtom(Input1);
+                                            Brimstone.API.RemoveAtom(Input2);
+                                            seb.field_3937.Add(new(seb, Input1.field_2278, recipe.output_lo));
+                                            seb.field_3937.Add(new(seb, Input2.field_2278, recipe.output_hi));
+                                            Brimstone.API.DrawFallingAtom(seb, Input1);
+                                            Brimstone.API.DrawFallingAtom(seb, Input2);
+                                            pss.field_2743 = true;
+                                            pss.field_2744 = new AtomType[2] { recipe.output_lo, recipe.output_hi };
+                                            Brimstone.API.PlaySound(sim, Sounds.Dissolution);
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else if (pss.field_2743)
+                    {
+                        Brimstone.API.AddAtom(sim, part, fluxismusOutputFixus, pss.field_2744[0]);
+                        Brimstone.API.AddAtom(sim, part, fluxismusOutputMuto, pss.field_2744[1]);
                     }
                 }
             }
