@@ -109,7 +109,7 @@ public static class UncommonPrimesAtoms
         PaleMuto = Brimstone.API.CreateNormalAtom(
             ID: 195,
             modName: "UncommonPrimes",
-            name: "Muto",
+            name: "Pale Muto",
             pathToSymbol: "textures/atoms/UncommonPrimes/fluxismus/trueancompat/pale_muto_symbol",
             pathToDiffuse: "textures/atoms/UncommonPrimes/fluxismus/trueancompat/pale_muto_diffuse",
             pathToShade: "textures/atoms/UncommonPrimes/fluxismus/trueancompat/pale_muto_shade"
@@ -117,7 +117,7 @@ public static class UncommonPrimesAtoms
         TrueMuto = Brimstone.API.CreateNormalAtom(
             ID: 196,
             modName: "UncommonPrimes",
-            name: "Muto",
+            name: "True Muto",
             pathToSymbol: "textures/atoms/UncommonPrimes/fluxismus/trueancompat/true_muto_symbol",
             pathToDiffuse: "textures/atoms/UncommonPrimes/fluxismus/trueancompat/true_muto_diffuse",
             pathToShade: "textures/atoms/UncommonPrimes/fluxismus/trueancompat/true_muto_shade"
@@ -133,7 +133,7 @@ public static class UncommonPrimesAtoms
         DarkFixus = Brimstone.API.CreateNormalAtom(
             ID: 198,
             modName: "UncommonPrimes",
-            name: "Fixus",
+            name: "Dark Fixus",
             pathToSymbol: "textures/atoms/UncommonPrimes/fluxismus/trueancompat/dark_fixus_symbol",
             pathToDiffuse: "textures/atoms/UncommonPrimes/fluxismus/trueancompat/dark_fixus_diffuse",
             pathToShade: "textures/atoms/UncommonPrimes/fluxismus/trueancompat/dark_fixus_shade"
@@ -141,7 +141,7 @@ public static class UncommonPrimesAtoms
         TrueFixus = Brimstone.API.CreateNormalAtom(
             ID: 199,
             modName: "UncommonPrimes",
-            name: "Fixus",
+            name: "True Fixus",
             pathToSymbol: "textures/atoms/UncommonPrimes/fluxismus/trueancompat/true_fixus_symbol",
             pathToDiffuse: "textures/atoms/UncommonPrimes/fluxismus/trueancompat/true_fixus_diffuse",
             pathToShade: "textures/atoms/UncommonPrimes/fluxismus/trueancompat/true_fixus_shade"

@@ -200,5 +200,13 @@ public class UncommonPrimes : QuintessentialMod
         TrueAnimismus.API.addLeftHandRule(UncommonPrimesAtoms.DarkFixus, UncommonPrimesAtoms.PaleMuto);
         TrueAnimismus.API.addLeftHandRule(UncommonPrimesAtoms.TrueMuto, UncommonPrimesAtoms.TrueFixus);
         TrueAnimismus.API.addLeftHandRule(UncommonPrimesAtoms.TrueFixus, UncommonPrimesAtoms.TrueMuto);
+        // Add ratings
+        TrueAnimismus.API.AtomsForRating.Add(new(UncommonPrimesAtoms.TrueMuto, 3, "fluxismus"));
+        TrueAnimismus.API.AtomsForRating.Add(new(UncommonPrimesAtoms.PaleMuto, 2, "fluxismus"));
+        TrueAnimismus.API.AtomsForRating.Add(new(UncommonPrimesAtoms.Muto, 1, "fluxismus"));
+        TrueAnimismus.API.AtomsForRating.Add(new(Brimstone.API.VanillaAtoms.quicksilver, 0, "fluxismus"));
+        TrueAnimismus.API.AtomsForRating.Add(new(UncommonPrimesAtoms.Fixus, -1, "fluxismus"));
+        TrueAnimismus.API.AtomsForRating.Add(new(UncommonPrimesAtoms.DarkFixus, -2, "fluxismus"));
+        TrueAnimismus.API.AtomsForRating.Add(new(UncommonPrimesAtoms.TrueFixus, -3, "fluxismus"));
     }
 }

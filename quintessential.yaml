@@ -1,8 +1,8 @@
 Name: UncommonPrimes
-Version: 0.1.0
+Version: 0.1.1
 Icon: up_icon
 Title: "Uncommon Alchemical Primes"
-Desc: Adds the Ordinals (cardinal-likes) and Second-Order Metals, alongside glyphs to access them.
+Desc: Adds multiple new sets of elements, and glyphs to use them.
 DLL: "UncommonPrimes.dll"
 Dependences:
 - Name: Quintessential
@@ -12,3 +12,5 @@ Dependences:
 OptionalDependencies:
 - Name: ReductiveMetallurgy
   Version: 1.0.1
+- Name: TrueAnimismus
+  Version: 1.0.6
