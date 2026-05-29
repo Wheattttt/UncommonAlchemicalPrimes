@@ -1,6 +1,6 @@
 Name: UncommonPrimes
-Version: 0.1.1
-Icon: up_icon
+Version: 0.1.2
+Icon: up_mod_icon
 Title: "Uncommon Alchemical Primes"
 Desc: Adds multiple new sets of elements, and glyphs to use them.
 DLL: "UncommonPrimes.dll"

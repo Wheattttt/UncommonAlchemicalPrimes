@@ -119,10 +119,12 @@ public class UncommonPrimes : QuintessentialMod
 
     public static Texture periodicTableOverlay_Ordinals;
     public static Texture periodicTableOverlay_SoMetals;
+    public static Texture periodicTableOverlay_Fluxismus;
     public override void PostLoad()
     {
         periodicTableOverlay_Ordinals = Brimstone.API.GetTexture("textures/periodic_table/UncommonPrimes/overlay_ordinals");
         periodicTableOverlay_SoMetals = Brimstone.API.GetTexture("textures/periodic_table/UncommonPrimes/overlay_sometals");
+        periodicTableOverlay_Fluxismus = Brimstone.API.GetTexture("textures/periodic_table/UncommonPrimes/overlay_fluxismus");
         On.SolutionEditorBase.method_1997 += DrawPartSelectionGlows;
         On.class_177.method_50 += OnMethod50;
     }
@@ -156,6 +158,12 @@ public class UncommonPrimes : QuintessentialMod
             class_135.method_290("_Bismuth_", vector2 + new Vector2(1147f, 372f), class_238.field_1990.field_2151, DocumentScreen.field_2410, (enum_0)1, 1f, 0.6f, float.MaxValue, float.MaxValue, 0, default(Color), null, int.MaxValue, param_3473: false, param_3474: true);
             class_135.method_290("_Cobalt_", vector2 + new Vector2(1318f, 480f), class_238.field_1990.field_2151, DocumentScreen.field_2410, (enum_0)1, 1f, 0.6f, float.MaxValue, float.MaxValue, 0, default(Color), null, int.MaxValue, param_3473: false, param_3474: true);
             class_135.method_290("_Platinum_", vector2 + new Vector2(1148f, 585f), class_238.field_1990.field_2151, DocumentScreen.field_2410, (enum_0)1, 1f, 0.6f, float.MaxValue, float.MaxValue, 0, default(Color), null, int.MaxValue, param_3473: false, param_3474: true);
+        }
+        if (API.FluxismusEnabled == true) //Only show the metals on the periodic table if enabled in the API
+        {
+            class_135.method_272(periodicTableOverlay_Fluxismus, vector2 + new Vector2(83f, 94f));
+            class_135.method_290("_Muto_", vector2 + new Vector2(1037f, 350f), class_238.field_1990.field_2151, DocumentScreen.field_2410, (enum_0)1, 1f, 0.6f, float.MaxValue, float.MaxValue, 0, default(Color), null, int.MaxValue, param_3473: false, param_3474: true);
+            class_135.method_290("_Fixus_", vector2 + new Vector2(1037f, 176f), class_238.field_1990.field_2151, DocumentScreen.field_2410, (enum_0)1, 1f, 0.6f, float.MaxValue, float.MaxValue, 0, default(Color), null, int.MaxValue, param_3473: false, param_3474: true);
         }
         //Currently no periodic table overlay for Fluxismus
     }
