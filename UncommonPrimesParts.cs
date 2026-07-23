@@ -78,12 +78,11 @@ internal static class UncommonPrimesParts
         Editor.method_925(molecule, method1999, new HexIndex(0, 0), 0f, 1f, num, 1f, false, null);
     }
     #endregion
+    public static PartType Similarity, Stability, Osmosis, Exchange, Dissolution, Fluxismus, MutableBerlos;
 
-
-
-
-    public static PartType Similarity, Stability, Osmosis, Dissolution, Fluxismus;
-
+    const float sixtyDegrees = 60f * (float)Math.PI / 180f;
+    static HexRotation[] HexArmRotations => PartTypes.field_1767.field_1534;
+    static class_126 atomCageLighting => class_238.field_1989.field_90.field_232;
     public static Texture bowl = class_238.field_1989.field_90.field_170;
     public static Texture metalBowl = class_238.field_1989.field_90.field_255.field_292;
     public static Texture[] glyphFlashAnimation = Brimstone.API.GetAnimation("textures/parts/UncommonPrimes/glyph_flash.array", "flash", 10);
@@ -155,6 +154,27 @@ internal static class UncommonPrimesParts
     public static readonly HexIndex dissolutionInput2 = new(1, 0);
     public static readonly HexIndex dissolutionOutputHigh = new(1, 1);
     public static readonly HexIndex dissolutionOutputLow = new(-1, 1);
+
+    //Exchange
+    public static Texture exchangeBase = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/exchange/base");
+    public static Texture exchangeBottom = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/exchange/bottom");
+    public static Texture exchangeTop = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/exchange/top");
+    public static Texture exchangeGlossmask = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/exchange/gloss_mask");
+    public static Texture exchangeGloss = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/exchange/gloss");
+    public static Texture exchangeDemoteSymbol = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/exchange/lead_symbol");
+
+    public static Texture exchangeGlow = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/select/exchange_glow");
+    public static Texture exchangeStroke = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/select/exchange_stroke");
+
+    public static Texture exchangeIcon = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/icons/exchange");
+    public static Texture exchangeHover = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/icons/exchange_hover");
+
+    public static readonly HexIndex exchangeBowl = new(0, 0);
+    public static readonly HexIndex exchangeInputLeft = new(-1, -1);
+    public static readonly HexIndex exchangeOutputLeft = new(0, -1);
+    public static readonly HexIndex exchangeOutputRight = new(1, -1);
+    public static readonly HexIndex exchangeInputRight = new(2, -1);
+
 
     //Fluxismus
     public static Texture fluxismusBase = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/fluxismus/base");
@@ -370,6 +390,73 @@ internal static class UncommonPrimesParts
                 Editor.method_925(risingMetal2, risingOffset2, new HexIndex(0, 0), 0f, 1f, time, 1f, false, null);
             }
         });
+
+        Exchange = new()
+        {
+            field_1528 = "uncommon-primes-exchange", // ID
+            field_1529 = class_134.method_253("Glyph of Exchange", string.Empty), // Name
+            field_1530 = class_134.method_253("The glyph of exchange demotes two metal atoms to their lower second-order neighbor, and promotes the third metal atom by 1 metallicity.", string.Empty), // Description
+            field_1531 = 20, // Cost
+            field_1539 = true, // Is a glyph
+            field_1549 = exchangeGlow,
+            field_1550 = exchangeStroke,
+            field_1547 = exchangeIcon, // Panel icon
+            field_1548 = exchangeHover, // Hovered panel icon
+            field_1540 = new HexIndex[]
+        {
+                exchangeBowl,
+                exchangeInputLeft,
+                exchangeOutputLeft,
+                exchangeOutputRight,
+                exchangeInputRight
+        },
+            field_1551 = Permissions.None,
+            CustomPermissionCheck = perms => perms.Contains("UncommonPrimes: Exchange")
+        };
+        QApi.AddPartType(Exchange, static (part, pos, editor, renderer) =>
+        {
+            PartSimState pss = editor.method_507().method_481(part);
+            class_236 uco = editor.method_1989(part, pos);
+            float time = editor.method_504();
+
+            Vector2 offset = new(165f, 119f);
+            renderer.method_523(exchangeBase, Vector2.Zero, offset, 0f);
+            renderer.method_523(exchangeBottom, Vector2.Zero, offset, 0f);
+
+            int irisFrame = 15;
+            bool afterIrisOpens = false;
+            Molecule risingMetal1 = null;
+            Molecule risingMetal2 = null;
+            Vector2 risingOffset1 = uco.field_1984 + class_187.field_1742.method_492(exchangeOutputLeft).Rotated(uco.field_1985);
+            Vector2 risingOffset2 = uco.field_1984 + class_187.field_1742.method_492(exchangeOutputRight).Rotated(uco.field_1985);
+            if (pss.field_2743)
+            {
+                irisFrame = class_162.method_404((int)(class_162.method_411(1f, -1f, time) * 16f), 0, 15);
+                afterIrisOpens = time > 0.5f;
+                risingMetal1 = Molecule.method_1121(pss.field_2744[0]);
+                risingMetal2 = Molecule.method_1121(pss.field_2744[1]);
+                if (!afterIrisOpens)
+                {
+                    // show atom rising behind iris
+                    Editor.method_925(risingMetal1, risingOffset1, new HexIndex(0, 0), 0f, 1f, time, 1f, false, null);
+                    Editor.method_925(risingMetal2, risingOffset2, new HexIndex(0, 0), 0f, 1f, time, 1f, false, null);
+                }
+            }
+            renderer.method_529(class_238.field_1989.field_90.field_246[irisFrame], exchangeOutputLeft, Vector2.Zero); //Render Iris
+            renderer.method_529(class_238.field_1989.field_90.field_246[irisFrame], exchangeOutputRight, Vector2.Zero); //Render Iris
+            renderer.method_523(exchangeTop, Vector2.Zero, offset, 0f);
+            renderer.method_528(class_238.field_1989.field_90.field_255.field_292, exchangeBowl, Vector2.Zero); // metal bowl
+            renderer.method_529(class_238.field_1989.field_90.field_255.field_291, exchangeBowl, Vector2.Zero); // metal promotion symbol
+            renderer.method_529(exchangeDemoteSymbol, exchangeInputLeft, Vector2.Zero); //
+            renderer.method_529(exchangeDemoteSymbol, exchangeInputRight, Vector2.Zero); // metal demotion symbols
+            drawPartGloss(renderer, exchangeGloss, exchangeGlossmask, offset);
+            if (pss.field_2743 && afterIrisOpens)
+            {
+                // show atom rising infront of iris
+                Editor.method_925(risingMetal1, risingOffset1, new HexIndex(0, 0), 0f, 1f, time, 1f, false, null);
+                Editor.method_925(risingMetal2, risingOffset2, new HexIndex(0, 0), 0f, 1f, time, 1f, false, null);
+            }
+        });
         Fluxismus = new()
         {
             field_1528 = "uncommon-primes-fluxismus", // ID
@@ -434,12 +521,75 @@ internal static class UncommonPrimesParts
             }
         });
 
+        MutableBerlos = new PartType()
+        {
+            field_1528 = "uncommon-primes-mutableberlos",
+            field_1529 = class_134.method_253("Mutable Van Berlo's Wheel", string.Empty),
+            field_1530 = class_134.method_253("The Mutable Van Berlo's Wheel can have its atoms modified as if they weren't part of a wheel.", string.Empty),
+            field_1547 = class_235.method_615("textures/parts/UncommonPrimes/icons/mutableberlos"),
+            field_1548 = class_235.method_615("textures/parts/UncommonPrimes/icons/mutableberlos_hover"),
+            field_1531 = 30,
+            field_1532 = (enum_2)1, // Type?
+            field_1534 = new HexRotation[6]
+                {
+            		HexRotation.R0,
+                    HexRotation.R60,
+                    HexRotation.R120,
+                    HexRotation.R180,
+                    HexRotation.R240,
+                    HexRotation.R300,
+            	},
+            field_1533 = true, // Programmable
+            field_1552 = true, // Only One
+            field_1544 = new Dictionary<HexIndex, AtomType>(),
+            field_1536 = true, // Force Rotatable
+            field_1551 = Permissions.None,
+            CustomPermissionCheck = perms => perms.Contains("UncommonPrimes: Mutable Berlo's")
+        };
+        QApi.AddPartType(MutableBerlos, DrawMutableBerlos);
+
+                static Molecule TestMolecule()
+        {
+            Molecule molecule = new Molecule();
+            molecule.method_1105(new Atom(Brimstone.API.VanillaAtoms.water), new HexIndex(0, 1));
+            molecule.method_1105(new Atom(Brimstone.API.VanillaAtoms.salt), new HexIndex(1, 0));
+            molecule.method_1105(new Atom(Brimstone.API.VanillaAtoms.earth), new HexIndex(1, -1));
+            molecule.method_1105(new Atom(Brimstone.API.VanillaAtoms.fire), new HexIndex(0, -1));
+            molecule.method_1105(new Atom(Brimstone.API.VanillaAtoms.salt), new HexIndex(-1, 0));
+            molecule.method_1105(new Atom(Brimstone.API.VanillaAtoms.air), new HexIndex(-1, 1));
+            return molecule;
+        }
+
+        static void DrawMutableBerlos(Part part, Vector2 pos, SolutionEditorBase editor, class_195 renderer)
+        {
+            class_236 class236 = editor.method_1989(part, pos);
+            PartSimState partSimState = editor.method_507().method_481(part);
+            // draw atoms, if the simulation is stopped - otherwise, the running simulation will draw them
+            if (editor.method_503() == enum_128.Stopped)
+            {
+                if (part.method_1159() != MutableBerlos) return;
+                Editor.method_925(TestMolecule(), class236.field_1984, new HexIndex(0, 0), class236.field_1985, 1f, 1f, 1f, false, editor);
+            }
+
+            // draw arm stubs
+            API.PrivateMethod<SolutionEditorBase>("method_2005").Invoke(editor, new object[] { part.method_1165(), HexArmRotations, class236 });
+
+            // draw cages
+            for (int i = 0; i < 6; i++)
+            {
+                float radians = renderer.field_1798 + (i * sixtyDegrees);
+                Vector2 vector2_9 = renderer.field_1797 + UncommonPrimes.hexGraphicalOffset(new HexIndex(1, 0)).Rotated(radians);
+                API.PrivateMethod<SolutionEditorBase>("method_2003").Invoke(editor, new object[] { atomCageLighting, vector2_9, new Vector2(39f, 33f), radians });
+            }
+        }
 
         QApi.AddPartTypeToPanel(Similarity, false);
         QApi.AddPartTypeToPanel(Stability, false);
         QApi.AddPartTypeToPanel(Osmosis, false);
         QApi.AddPartTypeToPanel(Dissolution, false);
+        QApi.AddPartTypeToPanel(Exchange, false);
         QApi.AddPartTypeToPanel(Fluxismus, false);
+        QApi.AddPartTypeToPanel(MutableBerlos, PartTypes.field_1771);
 
         QApi.RunAfterCycle((sim, first) => {
             var seb = sim.field_3818;
@@ -449,21 +599,18 @@ internal static class UncommonPrimesParts
             {
                 return (Maybe<AtomReference>)API.PrivateMethod<Sim>("method_1850").Invoke(sim, new object[] { part, hex, list, checkWheels });
             }
-
-
-
             foreach (var part in allParts)
             {
                 class_236 partInfo = seb.method_1989(part, Vector2.Zero);
                 PartSimState pss = simStates[part];
+                int cycle = sim.method_1818();
                 var type = part.method_1159();
                 if (type == Similarity)
                 {
                     bool left = maybeFindAtom(part, similarityInput1, new List<Part>(), true).method_99(out AtomReference atomInputLeft);
                     bool right = maybeFindAtom(part, similarityInput2, new List<Part>(), true).method_99(out AtomReference atomInputRight);
                     bool output = maybeFindAtom(part, similarityOutput, new List<Part>()).method_99(out AtomReference atomOutput);
-                    bool didfindwheelatom = Wheel_MutableBerlos.MaybeFindMutableBerlosWheelAtom(sim, part, similarityOutput).method_99(out AtomReference atomOutputWheel);
-                    if (left && right && (output || didfindwheelatom) && (atomOutput.field_2280 == Brimstone.API.VanillaAtoms.salt))
+                    if (left && right && (output) && (atomOutput.field_2280 == Brimstone.API.VanillaAtoms.salt))
                     {
                         //check atom type
                         foreach (API.SimilarityRecipe recipe in API.SimilarityTransmutation)
@@ -583,6 +730,65 @@ internal static class UncommonPrimesParts
                         Brimstone.API.AddAtom(sim, part, dissolutionOutputHigh, pss.field_2744[1]);
                     }
                 }
+                else if (type == Exchange)
+                {
+                    if (first)
+                    {
+                        // Do atoms exist
+                        if ((sim.FindAtomRelative(part, exchangeInputLeft).method_99(out AtomReference InputMetalLeft)) && (sim.FindAtomRelative(part, exchangeInputRight).method_99(out AtomReference InputMetalRight)) && (sim.FindAtomRelative(part, exchangeBowl).method_99(out AtomReference InputMetalBowl)))
+                        {
+                            if ((!sim.FindAtomRelative(part, exchangeOutputLeft).method_1085()) && (!sim.FindAtomRelative(part, exchangeOutputRight).method_1085()))
+                            {
+                                // if atom isn't being held or consumed
+                                if (!InputMetalLeft.field_2281 && !InputMetalLeft.field_2282 && !InputMetalRight.field_2281 && !InputMetalRight.field_2282)
+                                {
+                                    bool leftValid = false;
+                                    bool rightValid = false;
+                                    AtomType leftAtom = Brimstone.API.VanillaAtoms.salt; // error handler salt. these should never remain as salt if the glyph fires
+                                    AtomType rightAtom = Brimstone.API.VanillaAtoms.salt;
+                                    bool bowlValid = false;
+                                    // check validity
+                                    foreach (API.HalfDemotionRecipe recipe in API.HalfDemotionTransmutation)
+                                    {
+                                        if (recipe.metalinput == (InputMetalLeft.field_2280))
+                                        {
+                                            leftValid = true;
+                                            leftAtom = recipe.metaloutput;
+                                        }
+                                        if (recipe.metalinput == (InputMetalRight.field_2280))
+                                        {
+                                            rightValid = true;
+                                            rightAtom = recipe.metaloutput;
+                                        }
+                                    }   
+                                    if (InputMetalBowl.field_2280.field_2297.method_1085()) // does the bowl metal project into anything?
+                                    {
+                                        bowlValid = true;
+                                    }
+                                    if (leftValid && rightValid && bowlValid)
+                                    {
+                                        Brimstone.API.ChangeAtom(InputMetalBowl, InputMetalBowl.field_2280.field_2297.method_1087());
+                                        InputMetalBowl.field_2279.field_2276 = new class_168(seb, 0, (enum_132)1, InputMetalBowl.field_2280, class_238.field_1989.field_81.field_614, 30f);
+                                        Brimstone.API.RemoveAtom(InputMetalLeft);
+                                        Brimstone.API.RemoveAtom(InputMetalRight);
+                                        seb.field_3937.Add(new(seb, InputMetalLeft.field_2278, leftAtom));
+                                        seb.field_3937.Add(new(seb, InputMetalRight.field_2278, rightAtom));
+                                        Brimstone.API.DrawFallingAtom(seb, InputMetalLeft);
+                                        Brimstone.API.DrawFallingAtom(seb, InputMetalRight);
+                                        pss.field_2743 = true;
+                                        pss.field_2744 = new AtomType[2] { leftAtom, rightAtom };
+                                        Brimstone.API.PlaySound(sim, Sounds.Dissolution);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else if (pss.field_2743)
+                    {
+                        Brimstone.API.AddAtom(sim, part, exchangeOutputLeft, pss.field_2744[0]);
+                        Brimstone.API.AddAtom(sim, part, exchangeOutputRight, pss.field_2744[1]);
+                    }
+                }
                 else if (type == Fluxismus)
                 {
                     if (first)
@@ -621,6 +827,17 @@ internal static class UncommonPrimesParts
                     {
                         Brimstone.API.AddAtom(sim, part, fluxismusOutputFixus, pss.field_2744[0]);
                         Brimstone.API.AddAtom(sim, part, fluxismusOutputMuto, pss.field_2744[1]);
+                    }
+                }
+                else if (type == MutableBerlos)
+                {
+                    if (cycle == 5 && first)
+                    {
+                        PartSimState partSimState = sim.field_3821[part];
+                        HexIndex field2724 = partSimState.field_2724;
+                        partSimState.field_2728 = true;
+                        partSimState.field_2729 = sim.method_1848(field2724);
+                        partSimState.field_2740 = true;
                     }
                 }
             }

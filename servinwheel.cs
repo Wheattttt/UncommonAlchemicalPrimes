@@ -121,8 +121,12 @@ public static class Wheel_Servin
             field_1552 = true,
             CustomPermissionCheck = perms => perms.Contains("UncommonPrimes: Servin's Wheel")
         };
-        foreach (var hex in HexIndex.AdjacentOffsets) Servin.field_1544.Add(hex, UncommonPrimesAtoms.Bellum);
-
+        Servin.field_1544.Add(new HexIndex(0, 1), UncommonPrimesAtoms.Obscurum);
+        Servin.field_1544.Add(new HexIndex(1, 0), Brimstone.API.VanillaAtoms.salt);
+        Servin.field_1544.Add(new HexIndex(1, -1), UncommonPrimesAtoms.Pax);
+        Servin.field_1544.Add(new HexIndex(0, -1), UncommonPrimesAtoms.Lux);
+        Servin.field_1544.Add(new HexIndex(-1, 0), Brimstone.API.VanillaAtoms.salt);
+        Servin.field_1544.Add(new HexIndex(-1, 1), UncommonPrimesAtoms.Bellum);
 
         QApi.AddPartTypeToPanel(Servin, Berlo);
         QApi.AddPartType(Servin, DrawServinPart);

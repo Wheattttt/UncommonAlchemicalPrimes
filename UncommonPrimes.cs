@@ -18,6 +18,7 @@ namespace UncommonPrimes;
 
 public class UncommonPrimes : QuintessentialMod
 {
+    public static QuintessentialMod self;
     // optional dependencies
     public static readonly bool ReductiveMetallurgyLoaded = Brimstone.API.IsModLoaded("ReductiveMetallurgy");
     public static readonly bool TrueAnimismusLoaded = Brimstone.API.IsModLoaded("TrueAnimismus");
@@ -64,6 +65,7 @@ public class UncommonPrimes : QuintessentialMod
         {
             QApi.AddPuzzlePermission("UncommonPrimes: Osmosis", "Glyph of Osmosis", "Uncommon Alchemical Primes");
             QApi.AddPuzzlePermission("UncommonPrimes: Dissolution", "Glyph of Dissolution", "Uncommon Alchemical Primes");
+            QApi.AddPuzzlePermission("UncommonPrimes: Exchange", "Glyph of Exchange", "Uncommon Alchemical Primes");
         }
         if (API.FluxismusEnabled == true) // Same for Fluxismus
         {
@@ -73,8 +75,7 @@ public class UncommonPrimes : QuintessentialMod
         {
             QApi.AddPuzzlePermission("UncommonPrimes: Servin's Wheel", "Servin's Wheel", "Uncommon Alchemical Primes");
         }
-
-        //QApi.AddPuzzlePermission("UncommonPrimes: Mutable Van Berlo's Wheel", "Mutable Van Berlo's Wheel", "Uncommon Primes");
+            QApi.AddPuzzlePermission("UncommonPrimes: Mutable Berlo's", "[WIP] Mutable Berlo's", "Uncommon Alchemical Primes");
         Quintessential.Logger.Log("[UncommonAlchemicalPrimes] Loaded");
         if (ReductiveMetallurgyLoaded)
         {
@@ -86,6 +87,7 @@ public class UncommonPrimes : QuintessentialMod
         }
         //------------------------- WHEEL HOOKING, stolen from RM -------------------------//
         IL.SolutionEditorBase.method_1984 += drawWheelAtoms;
+        IL.class_123.method_231 += method_231_limitlength;
     }
     private static void drawWheelAtoms(ILContext il)
     {
@@ -127,6 +129,7 @@ public class UncommonPrimes : QuintessentialMod
         periodicTableOverlay_Fluxismus = Brimstone.API.GetTexture("textures/periodic_table/UncommonPrimes/overlay_fluxismus");
         On.SolutionEditorBase.method_1997 += DrawPartSelectionGlows;
         On.class_177.method_50 += OnMethod50;
+        hook_Sim_method_1828 = new Hook(API.PrivateMethod<Sim>("method_1828"), OnSimMethod1828_SpawnScaffolds);
     }
 
     //Modify Periodic Table
@@ -165,15 +168,61 @@ public class UncommonPrimes : QuintessentialMod
             class_135.method_290("_Muto_", vector2 + new Vector2(1037f, 350f), class_238.field_1990.field_2151, DocumentScreen.field_2410, (enum_0)1, 1f, 0.6f, float.MaxValue, float.MaxValue, 0, default(Color), null, int.MaxValue, param_3473: false, param_3474: true);
             class_135.method_290("_Fixus_", vector2 + new Vector2(1037f, 176f), class_238.field_1990.field_2151, DocumentScreen.field_2410, (enum_0)1, 1f, 0.6f, float.MaxValue, float.MaxValue, 0, default(Color), null, int.MaxValue, param_3473: false, param_3474: true);
         }
-        //Currently no periodic table overlay for Fluxismus
+    }
+
+    // Limit length of Mutable Wheel
+    public static void method_231_limitlength(ILContext il)
+    {
+        ILCursor cursor = new ILCursor(il);
+        if (
+            !cursor.TryGotoNext(MoveType.After, instr => instr.Match(OpCodes.Ldloc_1))
+        ) { return; }
+        cursor.RemoveRange(2);
+        cursor.Emit(OpCodes.Ldarg_1);
+        cursor.EmitDelegate<Func<int, Part, HexIndex>>((int q, Part partType) => {
+            if (partType.method_1159() == UncommonPrimesParts.MutableBerlos)
+            {
+                return new HexIndex(1, 0);
+            }
+            else
+            {
+                return new HexIndex(q, 0);
+            }
+        });
+    }
+    private static IDetour hook_Sim_method_1828;
+    private delegate void orig_Sim_method_1828(Sim sim); //code that runs every cycle but before parts are processed
+
+    // Create Mutable Berlo atoms
+    private static void OnSimMethod1828_SpawnScaffolds(orig_Sim_method_1828 orig, Sim sim)
+    {
+        orig(sim);
+        if (sim.method_1818() == 0)//run once at the start of simulation, before arms execute grabs
+        {
+            var partDict = sim.field_3821;
+            List<Molecule> molecules = sim.field_3823;
+            foreach (var part in partDict.Keys)
+            {
+                if (part.method_1159() == UncommonPrimesParts.MutableBerlos)
+                {
+                    Molecule molecule = new Molecule();
+                    molecule.method_1105(new Atom(Brimstone.API.VanillaAtoms.water), part.method_1184(new HexIndex(0, 1)));
+                    molecule.method_1105(new Atom(Brimstone.API.VanillaAtoms.salt), part.method_1184(new HexIndex(1, 0)));
+                    molecule.method_1105(new Atom(Brimstone.API.VanillaAtoms.earth), part.method_1184(new HexIndex(1, -1)));
+                    molecule.method_1105(new Atom(Brimstone.API.VanillaAtoms.fire), part.method_1184(new HexIndex(0, -1)));
+                    molecule.method_1105(new Atom(Brimstone.API.VanillaAtoms.salt), part.method_1184(new HexIndex(-1, 0)));
+                    molecule.method_1105(new Atom(Brimstone.API.VanillaAtoms.air), part.method_1184(new HexIndex(-1, 1)));
+                    molecules.Add(molecule);
+                }
+            }
+        }
     }
 
     public void DrawPartSelectionGlows(On.SolutionEditorBase.orig_method_1997 orig, SolutionEditorBase seb_self, Part part, Vector2 pos, float alpha)
     {
         if (part.method_1159() == Wheel_Servin.Servin) Wheel_Servin.drawSelectionGlow(seb_self, part, pos, alpha);
+        if (part.method_1159() == UncommonPrimesParts.MutableBerlos) Wheel_Servin.drawSelectionGlow(seb_self, part, pos, alpha);
         orig(seb_self, part, pos, alpha);
-        //if (part.method_1159() == Wheel_MutableBerlos.MutableBerlos) Wheel_MutableBerlos.drawSelectionGlow(seb_self, part, pos, alpha);
-        //orig(seb_self, part, pos, alpha);
     }
     private static void LoadReductiveMetallurgyRules()
     {

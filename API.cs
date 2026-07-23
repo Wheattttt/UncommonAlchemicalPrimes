@@ -14,6 +14,7 @@ public static class API
     public static bool OrdinalsEnabled = true;
     public static bool SecondOrderMetalsEnabled = true;
     public static bool FluxismusEnabled = true;
+    public static bool MutableBerlosEnabled = false;
     public static MethodInfo PrivateMethod<T>(string method) => typeof(T).GetMethod(method, BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
     public struct SimilarityRecipe
     {
@@ -40,6 +41,17 @@ public static class API
         public AtomType lowinput;
         public AtomType highinput;
         public AtomType output;
+    }
+
+    public struct HalfDemotionRecipe
+    {
+        public HalfDemotionRecipe(AtomType metalinput, AtomType metaloutput)
+        {
+            this.metalinput = metalinput;
+            this.metaloutput = metaloutput;
+        }
+        public AtomType metalinput;
+        public AtomType metaloutput;
     }
 
     public struct FluxismusRecipe
@@ -71,6 +83,7 @@ public static class API
     public static List<SimilarityRecipe> SimilarityTransmutation = new(); // Left input, Right input, Output
     public static List<StabilityRecipe> StabilityTransmutation = new(); // Ordinal Input, Ordinal Input 2, Output
     public static List<OsmosisRecipe> OsmosisTransmutation = new(); // Low metal input, High metal input, Output
+    public static List<HalfDemotionRecipe> HalfDemotionTransmutation = new(); // Metal input, Metal output
     public static List<FluxismusRecipe> FluxismusTransmutation = new(); // Input atom, Upper atom, Lower atom
 
     public static void AddTransmutations()
@@ -115,6 +128,18 @@ public static class API
         OsmosisTransmutation.Add(new(UncommonPrimesAtoms.Nickel, UncommonPrimesAtoms.Bismuth, Brimstone.API.VanillaAtoms.iron));
         OsmosisTransmutation.Add(new(UncommonPrimesAtoms.Bismuth, UncommonPrimesAtoms.Cobalt, Brimstone.API.VanillaAtoms.copper));
         OsmosisTransmutation.Add(new(UncommonPrimesAtoms.Cobalt, UncommonPrimesAtoms.Platinum, Brimstone.API.VanillaAtoms.silver));
+
+        // HalfDemotions
+        HalfDemotionTransmutation.Add(new(Brimstone.API.VanillaAtoms.gold, UncommonPrimesAtoms.Platinum));
+        HalfDemotionTransmutation.Add(new(UncommonPrimesAtoms.Platinum, Brimstone.API.VanillaAtoms.silver));
+        HalfDemotionTransmutation.Add(new(Brimstone.API.VanillaAtoms.silver, UncommonPrimesAtoms.Cobalt));
+        HalfDemotionTransmutation.Add(new(UncommonPrimesAtoms.Cobalt, Brimstone.API.VanillaAtoms.copper));
+        HalfDemotionTransmutation.Add(new(Brimstone.API.VanillaAtoms.copper, UncommonPrimesAtoms.Bismuth));
+        HalfDemotionTransmutation.Add(new(UncommonPrimesAtoms.Bismuth, Brimstone.API.VanillaAtoms.iron));
+        HalfDemotionTransmutation.Add(new(Brimstone.API.VanillaAtoms.iron, UncommonPrimesAtoms.Nickel));
+        HalfDemotionTransmutation.Add(new(UncommonPrimesAtoms.Nickel, Brimstone.API.VanillaAtoms.tin));
+        HalfDemotionTransmutation.Add(new(Brimstone.API.VanillaAtoms.tin, UncommonPrimesAtoms.Zinc));
+        HalfDemotionTransmutation.Add(new(UncommonPrimesAtoms.Zinc, Brimstone.API.VanillaAtoms.lead));
 
         // Fluxismus recipe, just one
         FluxismusTransmutation.Add(new(Brimstone.API.VanillaAtoms.quicksilver, UncommonPrimesAtoms.Muto, UncommonPrimesAtoms.Fixus));
