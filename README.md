@@ -37,5 +37,5 @@ This also hides said atoms from the periodic table.
 
 This mod requires [Quintessential](https://github.com/ErikHaag/Quintessential/releases/tag/v0.5.4) and [Brimstone](https://github.com/ErikHaag/Brimstone/releases/tag/2.0.2).
 
-Additionally, the Second-Order Metals are compatible with [Reductive Metallurgy](https://github.com/icwass/ReductiveMetallurgy/releases/tag/v1.0.1), which is reccomended as well.  
-Fluxismus has combatibility with [True Animismus](https://github.com/ItsKazyan/TrueAn/releases/tag/bugfix1.0.5), however it is only partial. Notably, the Disposal Jack cannot be placed on the Fluxismus glyph, and the Glyph of Infusion does not work on Fluxismus atoms.
+Additionally, the Second-Order Metals are compatible with [Reductive Metallurgy](https://github.com/icwass/ReductiveMetallurgy/releases/tag/v1.0.1), which is recommended as well.  
+Fluxismus has combatibility with [True Animismus](https://github.com/ItsKazyan/TrueAn/releases/tag/bugfix1.0.5), however the disposal jack cannot be used on the Glyph of Fluxismus.
