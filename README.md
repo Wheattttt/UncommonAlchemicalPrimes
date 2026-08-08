@@ -17,7 +17,7 @@ The Second-Order Metals, pictured above, are a group of five new metals that exi
 The **Glyph of Osmosis** will take two adjacent metals (For example, Silver and Copper), and convert them to their shared opposite-order metal (two atoms of Cobalt).  
 The **Glyph of Dissolution** is a similar transmutation, but in reverse. It will take two of the same metal (For example, two atoms of Iron), and convert them to their opposite order neighbors (Bismuth and Nickel).
 Both of these glyphs can take in either base metals, or Second-Order Metals.  
-  
+The **Glyph of Exchange** takes in two metal atoms as input, and a third metal atom in a bowl. The two input metals will be processed into their lower opposite-order neighbor (i.e. Nickel -> Tin, Copper -> Bismuth) while the metal in the bowl will be fully promoted (Silver -> Gold, Zinc -> Nickel). These three inputs can be any combination of metals or Second-Order Metals. 
 It may be useful to categorize them as effectively "half-metals" with metallicity between their neighboring metals, however they actually exist on their own scale of second-order metallicity from 1 to 5. This behavior becomes especially obvious with the Glyph of Deposition / Division.  
 
 ## **FLUXISMUS**
