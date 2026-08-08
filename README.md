@@ -18,7 +18,7 @@ The **Glyph of Osmosis** will take two adjacent metals (For example, Silver and 
 The **Glyph of Dissolution** is a similar transmutation, but in reverse. It will take two of the same metal (For example, two atoms of Iron), and convert them to their opposite order neighbors (Bismuth and Nickel).
 Both of these glyphs can take in either base metals, or Second-Order Metals.  
   
-It may be useful to categorize them as effectively "half-metals" with metallicity between their neighboring metals, however they actually exist on their own scale of second-order metallicity from 1 to 5. This behavior becomes especially obvious with the Glyph of Deposition.  
+It may be useful to categorize them as effectively "half-metals" with metallicity between their neighboring metals, however they actually exist on their own scale of second-order metallicity from 1 to 5. This behavior becomes especially obvious with the Glyph of Deposition / Division.  
 
 ## **FLUXISMUS**
 <img width="332" height="287" alt="image" src="https://github.com/user-attachments/assets/cda571fb-563c-4757-abea-1d4295b09a4f" />
