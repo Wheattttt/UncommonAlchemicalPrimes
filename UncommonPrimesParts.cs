@@ -105,8 +105,8 @@ internal static class UncommonPrimesParts
     public static Texture stabilityBase = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/stability/base");
     public static Texture stabilityTop = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/stability/top");
 
-    public static Texture stabilityIcon = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/icons/similarity");
-    public static Texture stabilityHover = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/icons/similarity_hover");
+    public static Texture stabilityIcon = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/icons/stability");
+    public static Texture stabilityHover = Brimstone.API.GetTexture("textures/parts/UncommonPrimes/icons/stability_hover");
 
     public static readonly HexIndex stabilityOrdinal1Hex = new(0, 0);
     public static readonly HexIndex stabilityOrdinal2Hex = new(1, 0);

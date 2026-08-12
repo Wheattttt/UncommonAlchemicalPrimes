@@ -246,9 +246,9 @@ public class UncommonPrimes : QuintessentialMod
     private static void LoadTrueAnimismusRules()
     {
         //Add TA Disproportion
-        TrueAnimismus.API.addDisproportionRule(UncommonPrimesAtoms.Muto, UncommonPrimesAtoms.PaleMuto, Brimstone.API.VanillaAtoms.salt);
+        TrueAnimismus.API.addDisproportionRule(UncommonPrimesAtoms.Muto, UncommonPrimesAtoms.PaleMuto, Brimstone.API.VanillaAtoms.quicksilver);
         TrueAnimismus.API.addDisproportionRule(UncommonPrimesAtoms.PaleMuto, UncommonPrimesAtoms.TrueMuto, UncommonPrimesAtoms.Muto);
-        TrueAnimismus.API.addDisproportionRule(UncommonPrimesAtoms.Fixus, UncommonPrimesAtoms.DarkFixus, Brimstone.API.VanillaAtoms.salt);
+        TrueAnimismus.API.addDisproportionRule(UncommonPrimesAtoms.Fixus, UncommonPrimesAtoms.DarkFixus, Brimstone.API.VanillaAtoms.quicksilver);
         TrueAnimismus.API.addDisproportionRule(UncommonPrimesAtoms.DarkFixus, UncommonPrimesAtoms.TrueFixus, UncommonPrimesAtoms.Fixus);
         // Add TA Left Hand
         TrueAnimismus.API.addLeftHandRule(UncommonPrimesAtoms.Muto, UncommonPrimesAtoms.Fixus);
