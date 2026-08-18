@@ -591,21 +591,17 @@ internal static class UncommonPrimesParts
         QApi.AddPartTypeToPanel(Fluxismus, false);
         QApi.AddPartTypeToPanel(MutableBerlos, PartTypes.field_1771);
 
-        QApi.RunAfterCycle((sim, first) => {
+        QApi.RunDuringCycle(static (sim, part, pss, first) => {
             var seb = sim.field_3818;
-            List<Part> allParts = seb.method_502().field_3919;
             var simStates = sim.field_3821;
             Maybe<AtomReference> maybeFindAtom(Part part, HexIndex hex, List<Part> list, bool checkWheels = false)
             {
                 return (Maybe<AtomReference>)API.PrivateMethod<Sim>("method_1850").Invoke(sim, new object[] { part, hex, list, checkWheels });
             }
-            foreach (var part in allParts)
-            {
-                class_236 partInfo = seb.method_1989(part, Vector2.Zero);
-                PartSimState pss = simStates[part];
-                int cycle = sim.method_1818();
-                var type = part.method_1159();
-                if (type == Similarity)
+            class_236 partInfo = seb.method_1989(part, Vector2.Zero);;
+            int cycle = sim.method_1818();
+            var type = part.method_1159();
+            if (type == Similarity)
                 {
                     bool left = maybeFindAtom(part, similarityInput1, new List<Part>(), true).method_99(out AtomReference atomInputLeft);
                     bool right = maybeFindAtom(part, similarityInput2, new List<Part>(), true).method_99(out AtomReference atomInputRight);
@@ -627,7 +623,7 @@ internal static class UncommonPrimesParts
                         }
                     }
                 }
-                else if (type == Stability)
+            else if (type == Stability)
                 {
                     bool ordinal1 = maybeFindAtom(part, stabilityOrdinal1Hex, new List<Part>(), true).method_99(out AtomReference OrdinalAtom1);
                     bool ordinal2 = maybeFindAtom(part, stabilityOrdinal2Hex, new List<Part>(), true).method_99(out AtomReference OrdinalAtom2);
@@ -650,7 +646,7 @@ internal static class UncommonPrimesParts
                         }
                     }
                 }
-                else if (type == Osmosis)
+            else if (type == Osmosis)
                 {
                     if (first)
                     {
@@ -690,7 +686,7 @@ internal static class UncommonPrimesParts
                         Brimstone.API.AddAtom(sim, part, osmosisOutput2, pss.field_2744[0]);
                     }
                 }
-                else if (type == Dissolution)
+            else if (type == Dissolution)
                 {
                     if (first)
                     {
@@ -730,7 +726,7 @@ internal static class UncommonPrimesParts
                         Brimstone.API.AddAtom(sim, part, dissolutionOutputHigh, pss.field_2744[1]);
                     }
                 }
-                else if (type == Exchange)
+            else if (type == Exchange)
                 {
                     if (first)
                     {
@@ -789,7 +785,7 @@ internal static class UncommonPrimesParts
                         Brimstone.API.AddAtom(sim, part, exchangeOutputRight, pss.field_2744[1]);
                     }
                 }
-                else if (type == Fluxismus)
+            else if (type == Fluxismus)
                 {
                     if (first)
                     {
@@ -829,7 +825,7 @@ internal static class UncommonPrimesParts
                         Brimstone.API.AddAtom(sim, part, fluxismusOutputMuto, pss.field_2744[1]);
                     }
                 }
-                else if (type == MutableBerlos)
+            else if (type == MutableBerlos)
                 {
                     if (cycle == 5 && first)
                     {
@@ -840,7 +836,6 @@ internal static class UncommonPrimesParts
                         partSimState.field_2740 = true;
                     }
                 }
-            }
         });
     }
 }

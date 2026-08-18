@@ -1,14 +1,14 @@
 Name: UncommonPrimes
-Version: 0.1.4
+Version: 0.1.5
 Icon: up_mod_icon
 Title: "Uncommon Alchemical Primes"
 Desc: Adds multiple new sets of elements, and glyphs to use them.
 DLL: "UncommonPrimes.dll"
 Dependences:
 - Name: Quintessential
-  Version: 0.5.1
+  Version: 0.6.2
 - Name: Brimstone
-  Version: 2.0.2
+  Version: 2.2.1
 OptionalDependencies:
 - Name: ReductiveMetallurgy
   Version: 1.0.1
