@@ -7,8 +7,8 @@ The Ordinals, pictured above, are special elements that can be calcified and dup
 The **Glyph of Similarity** will transmute an atom of Salt resting in the bowl, to whichever Ordinal is shared by the two Cardinal Elements in the input bowls.  
 The **Glyph of Stability** will transmute two Ordinals into their shared Cardinal, or Salt if the Ordinals are opposed.  
   
-While it may seem like they are "composite" elements of their neighboring cardinal elements, the opposite is true. The Ordinals represent traits their adjacent Cardinals have in common, and are more abstract as a result.
-The ordinals are typically rare in nature, as they represent more abstract traits than the much more common cardinals. While their behaviors are quite interpretable, Bellum/Pax represent chaos/stillness and rising/falling (Fire and Air are chaotic and light, Water and Earth are still and heavy), whereas Lux/Obscurum represent light/dark and growth/stagnation (Fire and Earth grow, albeit in different ways, Air and Water both create darkness and fog). 
+While it may seem like they are "composite" elements of their neighboring cardinal elements, the opposite is true. The Ordinals represent traits their adjacent Cardinals have in common.
+The ordinals are typically rare in nature, as they represent more abstract traits than the much more common cardinals. While their behaviors are quite interpretable, Bellum/Pax tend to represent chaos/stillness and rising/falling (Fire and Air are chaotic and light, Water and Earth are still and heavy), whereas Lux/Obscurum tend to represent light/dark and growth/stagnation (Fire and Earth grow, albeit in different ways, Air and Water both create darkness and fog). 
 
   
   
