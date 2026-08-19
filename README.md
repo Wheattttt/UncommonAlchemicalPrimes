@@ -7,7 +7,9 @@ The Ordinals, pictured above, are special elements that can be calcified and dup
 The **Glyph of Similarity** will transmute an atom of Salt resting in the bowl, to whichever Ordinal is shared by the two Cardinal Elements in the input bowls.  
 The **Glyph of Stability** will transmute two Ordinals into their shared Cardinal, or Salt if the Ordinals are opposed.  
   
-While it may seem like they are "Composite" elements of their neighboring cardinal elements, the opposite is true. The Ordinals represent traits shared between their adjacent Cardinals, and are more abstract as a result.  
+While it may seem like they are "composite" elements of their neighboring cardinal elements, the opposite is true. The Ordinals represent traits their adjacent Cardinals have in common, and are more abstract as a result.
+The ordinals are typically rare in nature, as they represent more abstract traits than the much more common cardinals. While their behaviors are quite interpretable, Bellum/Pax represent chaos/stillness and rising/falling (Fire and Air are chaotic and light, Water and Earth are still and heavy), whereas Lux/Obscurum represent light/dark and growth/stagnation (Fire and Earth grow, albeit in different ways, Air and Water both create darkness and fog). 
+
   
   
 ## **THE SECOND-ORDER METALS**
@@ -24,7 +26,9 @@ It may be useful to categorize them as effectively "half-metals" with metallicit
 <img width="332" height="287" alt="image" src="https://github.com/user-attachments/assets/cda571fb-563c-4757-abea-1d4295b09a4f" />
 
 The Fluxismus atoms are akin to the process of Animismus, but applied to Quicksilver as opposed to Salt.  
+Muto and Fixus represent the positive and negative aspect of change respectively.
 The **Glyph of Fluxismus** will take two quicksilver, producing an atom of Muto and an atom of Fixus.
+
 
 ## **CAMPAIGN SUPPORT**
 This mod is designed around supported use in campaigns. Any of the above atom groups can be disabled by your campaign by putting the following lines in your campaign's load method:  
