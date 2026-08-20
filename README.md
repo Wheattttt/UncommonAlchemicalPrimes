@@ -20,7 +20,7 @@ The **Glyph of Osmosis** will take two adjacent metals (For example, Silver and 
 The **Glyph of Dissolution** is a similar transmutation, but in reverse. It will take two of the same metal (For example, two atoms of Iron), and convert them to their opposite order neighbors (Bismuth and Nickel).
 Both of these glyphs can take in either base metals, or Second-Order Metals.  
 The **Glyph of Exchange** takes in two metal atoms as input, and a third metal atom in a bowl. The two input metals will be processed into their lower opposite-order neighbor (i.e. Nickel -> Tin, Copper -> Bismuth) while the metal in the bowl will be fully promoted (Silver -> Gold, Zinc -> Nickel). These three inputs can be any combination of metals or Second-Order Metals. 
-It may be useful to categorize them as effectively "half-metals" with metallicity between their neighboring metals, however they actually exist on their own scale of second-order metallicity from 1 to 5. This behavior becomes especially obvious with the Glyph of Deposition / Division.  
+Second-Order Metals are fragile, and break down lossily into basemetals when put through the Glyph of Division/Deposition. For example, Cobalt (Effectively 4.5) divides into x2 Tin (2 + 2).
 
 ## **FLUXISMUS**
 <img width="332" height="287" alt="image" src="https://github.com/user-attachments/assets/cda571fb-563c-4757-abea-1d4295b09a4f" />
@@ -43,3 +43,4 @@ This mod requires [Quintessential](https://github.com/ErikHaag/Quintessential/re
 
 Additionally, the Second-Order Metals are compatible with [Reductive Metallurgy](https://github.com/icwass/ReductiveMetallurgy/releases/tag/v1.0.1), which is recommended as well.  
 Fluxismus has combatibility with [True Animismus](https://github.com/ItsKazyan/TrueAn/releases/tag/bugfix1.0.5), however the disposal jack cannot be used on the Glyph of Fluxismus.
+The Second-Order Metals have compatibility with [Vacancy (Discord Link)](https://discord.com/channels/278707932089155584/1238621882652033094/1244388366133493781), creating a new metal "Arsenic" between Vaca and Lead.
