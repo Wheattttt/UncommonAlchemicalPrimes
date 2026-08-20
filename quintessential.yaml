@@ -1,5 +1,5 @@
 Name: UncommonPrimes
-Version: 0.1.5
+Version: 0.2.0
 Icon: up_mod_icon
 Title: "Uncommon Alchemical Primes"
 Desc: Adds multiple new sets of elements, and glyphs to use them.
@@ -8,9 +8,11 @@ Dependences:
 - Name: Quintessential
   Version: 0.6.2
 - Name: Brimstone
-  Version: 2.2.1
+  Version: 2.3.0
 OptionalDependencies:
 - Name: ReductiveMetallurgy
   Version: 1.0.1
 - Name: TrueAnimismus
   Version: 1.0.6
+- Name: Vacancy
+  Version: 1.0.1

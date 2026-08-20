@@ -6,7 +6,7 @@ namespace UncommonPrimes;
 
 public static class UncommonPrimesAtoms
 {
-    public static AtomType Bellum, Obscurum, Lux, Pax, Zinc, Nickel, Bismuth, Cobalt, Platinum, Muto, PaleMuto, TrueMuto, Fixus, DarkFixus, TrueFixus;
+    public static AtomType Bellum, Obscurum, Lux, Pax, PurifDummy, Arsenic, Zinc, Nickel, Bismuth, Cobalt, Platinum, Muto, PaleMuto, TrueMuto, Fixus, DarkFixus, TrueFixus;
     public static void AddAtomTypes()
     {
         // Ordinals
@@ -18,7 +18,7 @@ public static class UncommonPrimesAtoms
             pathToBase: "textures/atoms/UncommonPrimes/bellum_base",
             pathToShadow: "textures/atoms/UncommonPrimes/bellum_shadow",
             pathToFog: "textures/atoms/UncommonPrimes/bellum_fog",
-            pathToRim: "textures/atoms/UncommonPrimes/fog"
+            pathToBase2: "textures/atoms/UncommonPrimes/fog"
         );
         Obscurum = Brimstone.API.CreateCardinalAtom(
             ID: 191,
@@ -28,7 +28,7 @@ public static class UncommonPrimesAtoms
             pathToBase: "textures/atoms/UncommonPrimes/obscurus_base",
             pathToShadow: "textures/atoms/UncommonPrimes/obscurus_shadow",
             pathToFog: "textures/atoms/UncommonPrimes/fog",
-            pathToRim: "textures/atoms/UncommonPrimes/fog"
+            pathToBase2: "textures/atoms/UncommonPrimes/fog"
         );
         Lux = Brimstone.API.CreateCardinalAtom(
             ID: 192,
@@ -38,7 +38,7 @@ public static class UncommonPrimesAtoms
             pathToBase: "textures/atoms/UncommonPrimes/lux_base",
             pathToShadow: "textures/atoms/UncommonPrimes/lux_shadow",
             pathToFog: "textures/atoms/UncommonPrimes/fog",
-            pathToRim: "textures/atoms/UncommonPrimes/fog"
+            pathToBase2: "textures/atoms/UncommonPrimes/fog"
         );
         Pax = Brimstone.API.CreateCardinalAtom(
             ID: 193,
@@ -48,7 +48,7 @@ public static class UncommonPrimesAtoms
             pathToBase: "textures/atoms/UncommonPrimes/pax_base",
             pathToShadow: "textures/atoms/UncommonPrimes/pax_shadow",
             pathToFog: "textures/atoms/UncommonPrimes/fog",
-            pathToRim: "textures/atoms/UncommonPrimes/fog"
+            pathToBase2: "textures/atoms/UncommonPrimes/fog"
         );
 
         // Add second-order metals (In reverse order, as promotesTo can only reference already existing atoms)
@@ -95,6 +95,24 @@ public static class UncommonPrimesAtoms
             pathToLightramp: "textures/atoms/UncommonPrimes/metals/zinc_lightramp",
             pathToRimlight: "textures/atoms/UncommonPrimes/metals/zinc_rimlight",
             promotesTo: Nickel
+        );
+        Arsenic = Brimstone.API.CreateMetalAtom(
+            ID: 154,
+            modName: "UncommonPrimes",
+            name: "Arsenic",
+            pathToSymbol: "textures/atoms/UncommonPrimes/metals/arsenic_symbol",
+            pathToLightramp: "textures/atoms/UncommonPrimes/metals/arsenic_lightramp",
+            pathToRimlight: "textures/atoms/UncommonPrimes/metals/arsenic_rimlight",
+            promotesTo: Zinc
+        );
+        PurifDummy = Brimstone.API.CreateMetalAtom( // I hate this hack... Arsenic needs to project to Zinc, but purif to Lead... So we hijack purif glyph to see Arsenic as this dummy atom instead.
+            ID: 153,
+            modName: "UncommonPrimes",
+            name: "PurifDummy",
+            pathToSymbol: "textures/atoms/UncommonPrimes/metals/arsenic_symbol",
+            pathToLightramp: "textures/atoms/UncommonPrimes/metals/arsenic_lightramp",
+            pathToRimlight: "textures/atoms/UncommonPrimes/metals/arsenic_rimlight",
+            promotesTo: Brimstone.API.VanillaAtoms.lead
         );
 
         // Add Fluxismus
@@ -154,7 +172,11 @@ public static class UncommonPrimesAtoms
             QApi.AddAtomType(Lux);
             QApi.AddAtomType(Pax);
         }
-        if (API.SecondOrderMetalsEnabled == true) // Same for metals
+        if (UncommonPrimes.VacancyLoaded) // Add Arsenic if Vaca is available
+        {
+            QApi.AddAtomType(Arsenic);
+        }
+        if (API.SecondOrderMetalsEnabled == true) // Only add the Second Order Metals to the editor if enabled in the API
         {
             QApi.AddAtomType(Zinc);
             QApi.AddAtomType(Nickel);

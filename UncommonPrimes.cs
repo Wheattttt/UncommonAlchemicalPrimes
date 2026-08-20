@@ -22,6 +22,7 @@ public class UncommonPrimes : QuintessentialMod
     // optional dependencies
     public static readonly bool ReductiveMetallurgyLoaded = Brimstone.API.IsModLoaded("ReductiveMetallurgy");
     public static readonly bool TrueAnimismusLoaded = Brimstone.API.IsModLoaded("TrueAnimismus");
+    public static readonly bool VacancyLoaded = Brimstone.API.IsModLoaded("Vacancy");
 
     // Drawing helpers, stolen from RM
     public static Vector2 hexGraphicalOffset(HexIndex hex) => class_187.field_1742.method_492(hex);
@@ -37,6 +38,10 @@ public class UncommonPrimes : QuintessentialMod
         if (TrueAnimismusLoaded)
         {
             Logger.Log("[UncommonAlchemicalPrimes] Found True Animismus");
+        }
+        if (VacancyLoaded)
+        {
+            Logger.Log("[UncommonAlchemicalPrimes] Found Vacancy");
         }
     }
     public override void Unload()
@@ -84,6 +89,10 @@ public class UncommonPrimes : QuintessentialMod
         if (TrueAnimismusLoaded)
         {
             LoadTrueAnimismusRules();
+        }
+        if (VacancyLoaded)
+        {
+            LoadVacancyRules();
         }
         //------------------------- WHEEL HOOKING, stolen from RM -------------------------//
         IL.SolutionEditorBase.method_1984 += drawWheelAtoms;
@@ -232,10 +241,10 @@ public class UncommonPrimes : QuintessentialMod
         ReductiveMetallurgy.API.addRejectionRule(UncommonPrimesAtoms.Bismuth, UncommonPrimesAtoms.Nickel);
         ReductiveMetallurgy.API.addRejectionRule(UncommonPrimesAtoms.Nickel, UncommonPrimesAtoms.Zinc);
         // Add RM Deposition Rules
-        ReductiveMetallurgy.API.addDepositionRule(UncommonPrimesAtoms.Platinum, UncommonPrimesAtoms.Bismuth, UncommonPrimesAtoms.Nickel);
-        ReductiveMetallurgy.API.addDepositionRule(UncommonPrimesAtoms.Cobalt, UncommonPrimesAtoms.Nickel, UncommonPrimesAtoms.Nickel);
-        ReductiveMetallurgy.API.addDepositionRule(UncommonPrimesAtoms.Bismuth, UncommonPrimesAtoms.Nickel, UncommonPrimesAtoms.Zinc);
-        ReductiveMetallurgy.API.addDepositionRule(UncommonPrimesAtoms.Nickel, UncommonPrimesAtoms.Zinc, UncommonPrimesAtoms.Zinc);
+        ReductiveMetallurgy.API.addDepositionRule(UncommonPrimesAtoms.Platinum, Brimstone.API.VanillaAtoms.iron, Brimstone.API.VanillaAtoms.tin);
+        ReductiveMetallurgy.API.addDepositionRule(UncommonPrimesAtoms.Cobalt, Brimstone.API.VanillaAtoms.tin, Brimstone.API.VanillaAtoms.tin);
+        ReductiveMetallurgy.API.addDepositionRule(UncommonPrimesAtoms.Bismuth, Brimstone.API.VanillaAtoms.tin, Brimstone.API.VanillaAtoms.lead);
+        ReductiveMetallurgy.API.addDepositionRule(UncommonPrimesAtoms.Nickel, Brimstone.API.VanillaAtoms.lead, Brimstone.API.VanillaAtoms.lead);
         // Add RM Proliferation
         ReductiveMetallurgy.API.addProliferationRule(UncommonPrimesAtoms.Platinum);
         ReductiveMetallurgy.API.addProliferationRule(UncommonPrimesAtoms.Cobalt);
@@ -265,5 +274,12 @@ public class UncommonPrimes : QuintessentialMod
         TrueAnimismus.API.AtomsForRating.Add(new(UncommonPrimesAtoms.Fixus, -1, "fluxismus"));
         TrueAnimismus.API.AtomsForRating.Add(new(UncommonPrimesAtoms.DarkFixus, -2, "fluxismus"));
         TrueAnimismus.API.AtomsForRating.Add(new(UncommonPrimesAtoms.TrueFixus, -3, "fluxismus"));
+    }
+
+    private static void LoadVacancyRules()
+    {
+        API.OsmosisTransmutation.Add(new(Vaca.MainClass.VacaAtom, Brimstone.API.VanillaAtoms.lead, UncommonPrimesAtoms.Arsenic));
+        API.OsmosisTransmutation.Add(new(UncommonPrimesAtoms.Arsenic, UncommonPrimesAtoms.Zinc, Brimstone.API.VanillaAtoms.lead));
+        ReductiveMetallurgy.API.addProliferationRule(UncommonPrimesAtoms.Arsenic);
     }
 }

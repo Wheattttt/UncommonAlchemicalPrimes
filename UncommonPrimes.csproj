@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <Reference Include="Brimstone">
-      <HintPath>..\Opus Magnum\Mods\Brimstone_2.2.1\Brimstone.dll</HintPath>
+      <HintPath>..\Opus Magnum\Mods\Brimstone_2.3.0\Brimstone.dll</HintPath>
     </Reference>
     <Reference Include="Lightning">
       <HintPath>..\Opus Magnum\ModdedLightning.exe</HintPath>
@@ -42,6 +42,9 @@
 	</Reference>
 	<Reference Include="TrueAnimismus">
 	  <HintPath>..\Opus Magnum\Mods\TrueAn_1.0.6\TrueAn.dll</HintPath>
+	</Reference>
+	<Reference Include="Vacancy">
+	  <HintPath>..\Opus Magnum\Mods\Vaca_1.0.1\Vaca.dll</HintPath>
 	</Reference>
     <Reference Include="YamlDotNet">
       <HintPath>..\Opus Magnum\YamlDotNet.dll</HintPath>

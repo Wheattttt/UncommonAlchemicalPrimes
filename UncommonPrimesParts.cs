@@ -198,6 +198,17 @@ internal static class UncommonPrimesParts
     public static readonly HexIndex fluxismusOutputMuto = new(1, 1);
     public static readonly HexIndex fluxismusOutputFixus = new(0, -1);
 
+
+    static Sound projectionActivate => class_238.field_1991.field_1844;
+    public static readonly HexIndex ProjectionInput = new(0, 0);
+    public static readonly HexIndex ProjectionOutput = new(1, 0);
+
+
+    static Sound purificationActivate => class_238.field_1991.field_1844;
+    public static readonly HexIndex PurificationInput1 = new(0, 0);
+    public static readonly HexIndex PurificationInput2 = new(1, 0);
+    public static readonly HexIndex PurificationOutput = new(0, 1);
+
     public static void AddPartTypes()
     {
         Similarity = new()
@@ -602,240 +613,248 @@ internal static class UncommonPrimesParts
             int cycle = sim.method_1818();
             var type = part.method_1159();
             if (type == Similarity)
+            {
+                bool left = maybeFindAtom(part, similarityInput1, new List<Part>(), true).method_99(out AtomReference atomInputLeft);
+                bool right = maybeFindAtom(part, similarityInput2, new List<Part>(), true).method_99(out AtomReference atomInputRight);
+                bool output = maybeFindAtom(part, similarityOutput, new List<Part>()).method_99(out AtomReference atomOutput);
+                if (left && right && (output) && (atomOutput.field_2280 == Brimstone.API.VanillaAtoms.salt))
                 {
-                    bool left = maybeFindAtom(part, similarityInput1, new List<Part>(), true).method_99(out AtomReference atomInputLeft);
-                    bool right = maybeFindAtom(part, similarityInput2, new List<Part>(), true).method_99(out AtomReference atomInputRight);
-                    bool output = maybeFindAtom(part, similarityOutput, new List<Part>()).method_99(out AtomReference atomOutput);
-                    if (left && right && (output) && (atomOutput.field_2280 == Brimstone.API.VanillaAtoms.salt))
+                    //check atom type
+                    foreach (API.SimilarityRecipe recipe in API.SimilarityTransmutation)
                     {
-                        //check atom type
-                        foreach (API.SimilarityRecipe recipe in API.SimilarityTransmutation)
+                        if ((recipe.leftinput == (atomInputLeft.field_2280)) && (recipe.rightinput == (atomInputRight.field_2280)))
                         {
-                            if ((recipe.leftinput == (atomInputLeft.field_2280)) && (recipe.rightinput == (atomInputRight.field_2280)))
-                            {
-                                Brimstone.API.ChangeAtom(atomOutput, recipe.output);
-                                atomOutput.field_2279.field_2276 = new class_168(seb, 0, (enum_132)1, atomOutput.field_2280, class_238.field_1989.field_81.field_614, 30f);
-                                seb.field_3935.Add(new class_228(seb, (enum_7)1, class_187.field_1742.method_492(part.method_1184(similarityOutput)), similarityFlashAnimation, 30f, Vector2.Zero, partInfo.field_1985));
-                                Brimstone.API.PlaySound(sim, Sounds.Similarity);
-                                break;
+                            Brimstone.API.ChangeAtom(atomOutput, recipe.output);
+                            atomOutput.field_2279.field_2276 = new class_168(seb, 0, (enum_132)1, atomOutput.field_2280, class_238.field_1989.field_81.field_614, 30f);
+                            seb.field_3935.Add(new class_228(seb, (enum_7)1, class_187.field_1742.method_492(part.method_1184(similarityOutput)), similarityFlashAnimation, 30f, Vector2.Zero, partInfo.field_1985));
+                            Brimstone.API.PlaySound(sim, Sounds.Similarity);
+                            break;
 
-                            }
                         }
                     }
                 }
+            }
             else if (type == Stability)
+            {
+                bool ordinal1 = maybeFindAtom(part, stabilityOrdinal1Hex, new List<Part>(), true).method_99(out AtomReference OrdinalAtom1);
+                bool ordinal2 = maybeFindAtom(part, stabilityOrdinal2Hex, new List<Part>(), true).method_99(out AtomReference OrdinalAtom2);
+                if (ordinal1 && ordinal2)
                 {
-                    bool ordinal1 = maybeFindAtom(part, stabilityOrdinal1Hex, new List<Part>(), true).method_99(out AtomReference OrdinalAtom1);
-                    bool ordinal2 = maybeFindAtom(part, stabilityOrdinal2Hex, new List<Part>(), true).method_99(out AtomReference OrdinalAtom2);
-                    if (ordinal1 && ordinal2)
+                    //check atom type
+                    foreach (API.StabilityRecipe recipe in API.StabilityTransmutation)
                     {
-                        //check atom type
-                        foreach (API.StabilityRecipe recipe in API.StabilityTransmutation)
+                        if ((recipe.ordinalinput1 == (OrdinalAtom1.field_2280)) && (recipe.ordinalinput2 == (OrdinalAtom2.field_2280)))
                         {
-                            if ((recipe.ordinalinput1 == (OrdinalAtom1.field_2280)) && (recipe.ordinalinput2 == (OrdinalAtom2.field_2280)))
-                            {
-                                Brimstone.API.ChangeAtom(OrdinalAtom1, recipe.output);
-                                OrdinalAtom1.field_2279.field_2276 = new class_168(seb, 0, (enum_132)1, OrdinalAtom1.field_2280, class_238.field_1989.field_81.field_614, 30f);
-                                Brimstone.API.ChangeAtom(OrdinalAtom2, recipe.output);
-                                OrdinalAtom2.field_2279.field_2276 = new class_168(seb, 0, (enum_132)1, OrdinalAtom2.field_2280, class_238.field_1989.field_81.field_614, 30f);
-                                //seb.field_3935.Add(new class_228(seb, (enum_7)1, class_187.field_1742.method_492(part.method_1184(similarityOutput)), similarityFlashAnimation, 30f, Vector2.Zero, partInfo.field_1985));
-                                Brimstone.API.PlaySound(sim, Sounds.Similarity);
-                                break;
+                            Brimstone.API.ChangeAtom(OrdinalAtom1, recipe.output);
+                            OrdinalAtom1.field_2279.field_2276 = new class_168(seb, 0, (enum_132)1, OrdinalAtom1.field_2280, class_238.field_1989.field_81.field_614, 30f);
+                            Brimstone.API.ChangeAtom(OrdinalAtom2, recipe.output);
+                            OrdinalAtom2.field_2279.field_2276 = new class_168(seb, 0, (enum_132)1, OrdinalAtom2.field_2280, class_238.field_1989.field_81.field_614, 30f);
+                            //seb.field_3935.Add(new class_228(seb, (enum_7)1, class_187.field_1742.method_492(part.method_1184(similarityOutput)), similarityFlashAnimation, 30f, Vector2.Zero, partInfo.field_1985));
+                            Brimstone.API.PlaySound(sim, Sounds.Similarity);
+                            break;
 
-                            }
                         }
                     }
                 }
+            }
             else if (type == Osmosis)
+            {
+                if (first)
                 {
-                    if (first)
+                    // Do atoms exist
+                    if ((sim.FindAtomRelative(part, osmosisInputLow).method_99(out AtomReference LowMetal)) && (sim.FindAtomRelative(part, osmosisInputHigh).method_99(out AtomReference HighMetal)))
                     {
-                        // Do atoms exist
-                        if ((sim.FindAtomRelative(part, osmosisInputLow).method_99(out AtomReference LowMetal)) && (sim.FindAtomRelative(part, osmosisInputHigh).method_99(out AtomReference HighMetal)))
+                        if ((!sim.FindAtomRelative(part, osmosisOutput1).method_1085()) && (!sim.FindAtomRelative(part, osmosisOutput2).method_1085()))
                         {
-                            if ((!sim.FindAtomRelative(part, osmosisOutput1).method_1085()) && (!sim.FindAtomRelative(part, osmosisOutput2).method_1085()))
+                            // if atom isn't being held or consumed
+                            if (!LowMetal.field_2281 && !LowMetal.field_2282 && !HighMetal.field_2281 && !HighMetal.field_2282)
                             {
-                                // if atom isn't being held or consumed
-                                if (!LowMetal.field_2281 && !LowMetal.field_2282 && !HighMetal.field_2281 && !HighMetal.field_2282)
-                                {
 
-                                    //check atom type
-                                    foreach (API.OsmosisRecipe recipe in API.OsmosisTransmutation)
-                                    {
-                                        if (recipe.lowinput == (LowMetal.field_2280) && recipe.highinput == (HighMetal.field_2280))
-                                        {
-                                            Brimstone.API.RemoveAtom(LowMetal);
-                                            Brimstone.API.RemoveAtom(HighMetal);
-                                            seb.field_3937.Add(new(seb, LowMetal.field_2278, recipe.lowinput));
-                                            seb.field_3937.Add(new(seb, HighMetal.field_2278, recipe.highinput));
-                                            Brimstone.API.DrawFallingAtom(seb, LowMetal);
-                                            Brimstone.API.DrawFallingAtom(seb, HighMetal);
-                                            pss.field_2743 = true;
-                                            pss.field_2744 = new AtomType[1] { recipe.output };
-                                            Brimstone.API.PlaySound(sim, Sounds.Osmosis);
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    else if (pss.field_2743)
-                    {
-                        Brimstone.API.AddAtom(sim, part, osmosisOutput1, pss.field_2744[0]);
-                        Brimstone.API.AddAtom(sim, part, osmosisOutput2, pss.field_2744[0]);
-                    }
-                }
-            else if (type == Dissolution)
-                {
-                    if (first)
-                    {
-                        // Do atoms exist
-                        if ((sim.FindAtomRelative(part, dissolutionInput1).method_99(out AtomReference InputMetal1)) && (sim.FindAtomRelative(part, dissolutionInput2).method_99(out AtomReference InputMetal2)))
-                        {
-                            if ((!sim.FindAtomRelative(part, dissolutionOutputHigh).method_1085()) && (!sim.FindAtomRelative(part, dissolutionOutputLow).method_1085()))
-                            {
-                                // if atom isn't being held or consumed
-                                if (!InputMetal1.field_2281 && !InputMetal1.field_2282 && !InputMetal2.field_2281 && !InputMetal2.field_2282)
+                                //check atom type
+                                foreach (API.OsmosisRecipe recipe in API.OsmosisTransmutation)
                                 {
-
-                                    //check atom type
-                                    foreach (API.OsmosisRecipe recipe in API.OsmosisTransmutation)
+                                    if (recipe.lowinput == (LowMetal.field_2280) && recipe.highinput == (HighMetal.field_2280))
                                     {
-                                        if (recipe.output == (InputMetal1.field_2280) && recipe.output == (InputMetal2.field_2280))
-                                        {
-                                            Brimstone.API.RemoveAtom(InputMetal1);
-                                            Brimstone.API.RemoveAtom(InputMetal2);
-                                            seb.field_3937.Add(new(seb, InputMetal1.field_2278, recipe.lowinput));
-                                            seb.field_3937.Add(new(seb, InputMetal2.field_2278, recipe.highinput));
-                                            Brimstone.API.DrawFallingAtom(seb, InputMetal1);
-                                            Brimstone.API.DrawFallingAtom(seb, InputMetal2);
-                                            pss.field_2743 = true;
-                                            pss.field_2744 = new AtomType[2] { recipe.lowinput, recipe.highinput };
-                                            Brimstone.API.PlaySound(sim, Sounds.Dissolution);
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    else if (pss.field_2743)
-                    {
-                        Brimstone.API.AddAtom(sim, part, dissolutionOutputLow, pss.field_2744[0]);
-                        Brimstone.API.AddAtom(sim, part, dissolutionOutputHigh, pss.field_2744[1]);
-                    }
-                }
-            else if (type == Exchange)
-                {
-                    if (first)
-                    {
-                        // Do atoms exist
-                        if ((sim.FindAtomRelative(part, exchangeInputLeft).method_99(out AtomReference InputMetalLeft)) && (sim.FindAtomRelative(part, exchangeInputRight).method_99(out AtomReference InputMetalRight)) && (sim.FindAtomRelative(part, exchangeBowl).method_99(out AtomReference InputMetalBowl)))
-                        {
-                            if ((!sim.FindAtomRelative(part, exchangeOutputLeft).method_1085()) && (!sim.FindAtomRelative(part, exchangeOutputRight).method_1085()))
-                            {
-                                // if atom isn't being held or consumed
-                                if (!InputMetalLeft.field_2281 && !InputMetalLeft.field_2282 && !InputMetalRight.field_2281 && !InputMetalRight.field_2282)
-                                {
-                                    bool leftValid = false;
-                                    bool rightValid = false;
-                                    AtomType leftAtom = Brimstone.API.VanillaAtoms.salt; // error handler salt. these should never remain as salt if the glyph fires
-                                    AtomType rightAtom = Brimstone.API.VanillaAtoms.salt;
-                                    bool bowlValid = false;
-                                    // check validity
-                                    foreach (API.HalfDemotionRecipe recipe in API.HalfDemotionTransmutation)
-                                    {
-                                        if (recipe.metalinput == (InputMetalLeft.field_2280))
-                                        {
-                                            leftValid = true;
-                                            leftAtom = recipe.metaloutput;
-                                        }
-                                        if (recipe.metalinput == (InputMetalRight.field_2280))
-                                        {
-                                            rightValid = true;
-                                            rightAtom = recipe.metaloutput;
-                                        }
-                                    }   
-                                    if (InputMetalBowl.field_2280.field_2297.method_1085()) // does the bowl metal project into anything?
-                                    {
-                                        bowlValid = true;
-                                    }
-                                    if (leftValid && rightValid && bowlValid)
-                                    {
-                                        Brimstone.API.ChangeAtom(InputMetalBowl, InputMetalBowl.field_2280.field_2297.method_1087());
-                                        InputMetalBowl.field_2279.field_2276 = new class_168(seb, 0, (enum_132)1, InputMetalBowl.field_2280, class_238.field_1989.field_81.field_614, 30f);
-                                        Brimstone.API.RemoveAtom(InputMetalLeft);
-                                        Brimstone.API.RemoveAtom(InputMetalRight);
-                                        seb.field_3937.Add(new(seb, InputMetalLeft.field_2278, leftAtom));
-                                        seb.field_3937.Add(new(seb, InputMetalRight.field_2278, rightAtom));
-                                        Brimstone.API.DrawFallingAtom(seb, InputMetalLeft);
-                                        Brimstone.API.DrawFallingAtom(seb, InputMetalRight);
+                                        Brimstone.API.RemoveAtom(LowMetal);
+                                        Brimstone.API.RemoveAtom(HighMetal);
+                                        seb.field_3937.Add(new(seb, LowMetal.field_2278, recipe.lowinput));
+                                        seb.field_3937.Add(new(seb, HighMetal.field_2278, recipe.highinput));
+                                        Brimstone.API.DrawFallingAtom(seb, LowMetal);
+                                        Brimstone.API.DrawFallingAtom(seb, HighMetal);
                                         pss.field_2743 = true;
-                                        pss.field_2744 = new AtomType[2] { leftAtom, rightAtom };
-                                        Brimstone.API.PlaySound(sim, Sounds.Dissolution);
+                                        pss.field_2744 = new AtomType[1] { recipe.output };
+                                        Brimstone.API.PlaySound(sim, Sounds.Osmosis);
+                                        break;
                                     }
                                 }
                             }
                         }
                     }
-                    else if (pss.field_2743)
-                    {
-                        Brimstone.API.AddAtom(sim, part, exchangeOutputLeft, pss.field_2744[0]);
-                        Brimstone.API.AddAtom(sim, part, exchangeOutputRight, pss.field_2744[1]);
-                    }
                 }
-            else if (type == Fluxismus)
+                else if (pss.field_2743)
                 {
-                    if (first)
+                    Brimstone.API.AddAtom(sim, part, osmosisOutput1, pss.field_2744[0]);
+                    Brimstone.API.AddAtom(sim, part, osmosisOutput2, pss.field_2744[0]);
+                }
+            }
+            else if (type == Dissolution)
+            {
+                if (first)
+                {
+                    // Do atoms exist
+                    if ((sim.FindAtomRelative(part, dissolutionInput1).method_99(out AtomReference InputMetal1)) && (sim.FindAtomRelative(part, dissolutionInput2).method_99(out AtomReference InputMetal2)))
                     {
-                        // Do atoms exist
-                        if ((sim.FindAtomRelative(part, dissolutionInput1).method_99(out AtomReference Input1)) && (sim.FindAtomRelative(part, dissolutionInput2).method_99(out AtomReference Input2)))
+                        if ((!sim.FindAtomRelative(part, dissolutionOutputHigh).method_1085()) && (!sim.FindAtomRelative(part, dissolutionOutputLow).method_1085()))
                         {
-                            if ((!sim.FindAtomRelative(part, dissolutionOutputHigh).method_1085()) && (!sim.FindAtomRelative(part, dissolutionOutputLow).method_1085()))
+                            // if atom isn't being held or consumed
+                            if (!InputMetal1.field_2281 && !InputMetal1.field_2282 && !InputMetal2.field_2281 && !InputMetal2.field_2282)
                             {
-                                // if atom isn't being held or consumed
-                                if (!Input1.field_2281 && !Input1.field_2282 && !Input2.field_2281 && !Input2.field_2282)
-                                {
 
-                                    //check atom type
-                                    foreach (API.FluxismusRecipe recipe in API.FluxismusTransmutation)
+                                //check atom type
+                                foreach (API.OsmosisRecipe recipe in API.OsmosisTransmutation)
+                                {
+                                    if (recipe.output == (InputMetal1.field_2280) && recipe.output == (InputMetal2.field_2280))
                                     {
-                                        if (recipe.input == (Input1.field_2280) && recipe.input == (Input2.field_2280))
-                                        {
-                                            Brimstone.API.RemoveAtom(Input1);
-                                            Brimstone.API.RemoveAtom(Input2);
-                                            seb.field_3937.Add(new(seb, Input1.field_2278, recipe.output_lo));
-                                            seb.field_3937.Add(new(seb, Input2.field_2278, recipe.output_hi));
-                                            Brimstone.API.DrawFallingAtom(seb, Input1);
-                                            Brimstone.API.DrawFallingAtom(seb, Input2);
-                                            pss.field_2743 = true;
-                                            pss.field_2744 = new AtomType[2] { recipe.output_lo, recipe.output_hi };
-                                            Brimstone.API.PlaySound(sim, Sounds.Dissolution);
-                                            break;
-                                        }
+                                        Brimstone.API.RemoveAtom(InputMetal1);
+                                        Brimstone.API.RemoveAtom(InputMetal2);
+                                        seb.field_3937.Add(new(seb, InputMetal1.field_2278, recipe.lowinput));
+                                        seb.field_3937.Add(new(seb, InputMetal2.field_2278, recipe.highinput));
+                                        Brimstone.API.DrawFallingAtom(seb, InputMetal1);
+                                        Brimstone.API.DrawFallingAtom(seb, InputMetal2);
+                                        pss.field_2743 = true;
+                                        pss.field_2744 = new AtomType[2] { recipe.lowinput, recipe.highinput };
+                                        Brimstone.API.PlaySound(sim, Sounds.Dissolution);
+                                        break;
                                     }
                                 }
                             }
                         }
                     }
-                    else if (pss.field_2743)
-                    {
-                        Brimstone.API.AddAtom(sim, part, fluxismusOutputFixus, pss.field_2744[0]);
-                        Brimstone.API.AddAtom(sim, part, fluxismusOutputMuto, pss.field_2744[1]);
-                    }
                 }
-            else if (type == MutableBerlos)
+                else if (pss.field_2743)
                 {
-                    if (cycle == 5 && first)
+                    Brimstone.API.AddAtom(sim, part, dissolutionOutputLow, pss.field_2744[0]);
+                    Brimstone.API.AddAtom(sim, part, dissolutionOutputHigh, pss.field_2744[1]);
+                }
+            }
+            else if (type == Exchange)
+            {
+                if (first)
+                {
+                    // Do atoms exist
+                    if ((sim.FindAtomRelative(part, exchangeInputLeft).method_99(out AtomReference InputMetalLeft)) && (sim.FindAtomRelative(part, exchangeInputRight).method_99(out AtomReference InputMetalRight)) && (sim.FindAtomRelative(part, exchangeBowl).method_99(out AtomReference InputMetalBowl)))
                     {
-                        PartSimState partSimState = sim.field_3821[part];
-                        HexIndex field2724 = partSimState.field_2724;
-                        partSimState.field_2728 = true;
-                        partSimState.field_2729 = sim.method_1848(field2724);
-                        partSimState.field_2740 = true;
+                        if ((!sim.FindAtomRelative(part, exchangeOutputLeft).method_1085()) && (!sim.FindAtomRelative(part, exchangeOutputRight).method_1085()))
+                        {
+                            // if atom isn't being held or consumed
+                            if (!InputMetalLeft.field_2281 && !InputMetalLeft.field_2282 && !InputMetalRight.field_2281 && !InputMetalRight.field_2282)
+                            {
+                                bool leftValid = false;
+                                bool rightValid = false;
+                                AtomType leftAtom = Brimstone.API.VanillaAtoms.salt; // error handler salt. these should never remain as salt if the glyph fires
+                                AtomType rightAtom = Brimstone.API.VanillaAtoms.salt;
+                                bool bowlValid = false;
+                                // check validity
+                                foreach (API.HalfDemotionRecipe recipe in API.HalfDemotionTransmutation)
+                                {
+                                    if (recipe.metalinput == (InputMetalLeft.field_2280))
+                                    {
+                                        leftValid = true;
+                                        leftAtom = recipe.metaloutput;
+                                    }
+                                    if (recipe.metalinput == (InputMetalRight.field_2280))
+                                    {
+                                        rightValid = true;
+                                        rightAtom = recipe.metaloutput;
+                                    }
+                                }
+                                if (InputMetalBowl.field_2280.field_2297.method_1085()) // does the bowl metal project into anything?
+                                {
+                                    bowlValid = true;
+                                }
+                                if (leftValid && rightValid && bowlValid)
+                                {
+                                    Brimstone.API.ChangeAtom(InputMetalBowl, InputMetalBowl.field_2280.field_2297.method_1087());
+                                    InputMetalBowl.field_2279.field_2276 = new class_168(seb, 0, (enum_132)1, InputMetalBowl.field_2280, class_238.field_1989.field_81.field_614, 30f);
+                                    Brimstone.API.RemoveAtom(InputMetalLeft);
+                                    Brimstone.API.RemoveAtom(InputMetalRight);
+                                    seb.field_3937.Add(new(seb, InputMetalLeft.field_2278, leftAtom));
+                                    seb.field_3937.Add(new(seb, InputMetalRight.field_2278, rightAtom));
+                                    Brimstone.API.DrawFallingAtom(seb, InputMetalLeft);
+                                    Brimstone.API.DrawFallingAtom(seb, InputMetalRight);
+                                    pss.field_2743 = true;
+                                    pss.field_2744 = new AtomType[2] { leftAtom, rightAtom };
+                                    Brimstone.API.PlaySound(sim, Sounds.Dissolution);
+                                }
+                            }
+                        }
                     }
                 }
+                else if (pss.field_2743)
+                {
+                    Brimstone.API.AddAtom(sim, part, exchangeOutputLeft, pss.field_2744[0]);
+                    Brimstone.API.AddAtom(sim, part, exchangeOutputRight, pss.field_2744[1]);
+                }
+            }
+            else if (type == Fluxismus)
+            {
+                if (first)
+                {
+                    // Do atoms exist
+                    if ((sim.FindAtomRelative(part, dissolutionInput1).method_99(out AtomReference Input1)) && (sim.FindAtomRelative(part, dissolutionInput2).method_99(out AtomReference Input2)))
+                    {
+                        if ((!sim.FindAtomRelative(part, dissolutionOutputHigh).method_1085()) && (!sim.FindAtomRelative(part, dissolutionOutputLow).method_1085()))
+                        {
+                            // if atom isn't being held or consumed
+                            if (!Input1.field_2281 && !Input1.field_2282 && !Input2.field_2281 && !Input2.field_2282)
+                            {
+
+                                //check atom type
+                                foreach (API.FluxismusRecipe recipe in API.FluxismusTransmutation)
+                                {
+                                    if (recipe.input == (Input1.field_2280) && recipe.input == (Input2.field_2280))
+                                    {
+                                        Brimstone.API.RemoveAtom(Input1);
+                                        Brimstone.API.RemoveAtom(Input2);
+                                        seb.field_3937.Add(new(seb, Input1.field_2278, recipe.output_lo));
+                                        seb.field_3937.Add(new(seb, Input2.field_2278, recipe.output_hi));
+                                        Brimstone.API.DrawFallingAtom(seb, Input1);
+                                        Brimstone.API.DrawFallingAtom(seb, Input2);
+                                        pss.field_2743 = true;
+                                        pss.field_2744 = new AtomType[2] { recipe.output_lo, recipe.output_hi };
+                                        Brimstone.API.PlaySound(sim, Sounds.Dissolution);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                else if (pss.field_2743)
+                {
+                    Brimstone.API.AddAtom(sim, part, fluxismusOutputFixus, pss.field_2744[0]);
+                    Brimstone.API.AddAtom(sim, part, fluxismusOutputMuto, pss.field_2744[1]);
+                }
+            }
+            else if (type == MutableBerlos)
+            {
+                if (cycle == 5 && first)
+                {
+                    PartSimState partSimState = sim.field_3821[part];
+                    HexIndex field2724 = partSimState.field_2724;
+                    partSimState.field_2728 = true;
+                    partSimState.field_2729 = sim.method_1848(field2724);
+                    partSimState.field_2740 = true;
+                }
+            }
+            else if (type == class_191.field_1779) // Purif override From Halving Metallurgy
+            {
+                if (first && pss.field_2743 && pss.field_2744[0] == UncommonPrimesAtoms.Arsenic)
+                {
+                    // Switch-a-roo
+                    pss.field_2744 = new AtomType[1] { UncommonPrimesAtoms.PurifDummy };
+                }
+            }
         });
     }
 }
