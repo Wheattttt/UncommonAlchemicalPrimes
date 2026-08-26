@@ -801,9 +801,9 @@ internal static class UncommonPrimesParts
                 if (first)
                 {
                     // Do atoms exist
-                    if ((sim.FindAtomRelative(part, dissolutionInput1).method_99(out AtomReference Input1)) && (sim.FindAtomRelative(part, dissolutionInput2).method_99(out AtomReference Input2)))
+                    if ((sim.FindAtomRelative(part, fluxismusInput1).method_99(out AtomReference Input1)) && (sim.FindAtomRelative(part, fluxismusInput2).method_99(out AtomReference Input2)))
                     {
-                        if ((!sim.FindAtomRelative(part, dissolutionOutputHigh).method_1085()) && (!sim.FindAtomRelative(part, dissolutionOutputLow).method_1085()))
+                        if ((!sim.FindAtomRelative(part, fluxismusOutputFixus).method_1085()) && (!sim.FindAtomRelative(part, fluxismusOutputMuto).method_1085()))
                         {
                             // if atom isn't being held or consumed
                             if (!Input1.field_2281 && !Input1.field_2282 && !Input2.field_2281 && !Input2.field_2282)

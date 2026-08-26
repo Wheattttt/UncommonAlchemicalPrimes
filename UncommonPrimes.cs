@@ -55,6 +55,7 @@ public class UncommonPrimes : QuintessentialMod
         Quintessential.Logger.Log("[UncommonAlchemicalPrimes] Uncommon Primes Loading");
         UncommonPrimesAtoms.AddAtomTypes();
         UncommonPrimesParts.AddPartTypes();
+        Chambers.AddChambers();
         Wheel_Servin.LoadContent();
         //Wheel_MutableBerlos.LoadContent();
         contentPath = Brimstone.API.GetContentPath("UncommonPrimes").method_1087();
@@ -66,6 +67,7 @@ public class UncommonPrimes : QuintessentialMod
             QApi.AddPuzzlePermission("UncommonPrimes: Similarity", "Glyph of Similarity", "Uncommon Alchemical Primes");
             QApi.AddPuzzlePermission("UncommonPrimes: Stability", "Glyph of Stability", "Uncommon Alchemical Primes");
         }
+        
         if (API.SecondOrderMetalsEnabled == true) // Same for Second-Order Metals
         {
             QApi.AddPuzzlePermission("UncommonPrimes: Osmosis", "Glyph of Osmosis", "Uncommon Alchemical Primes");
