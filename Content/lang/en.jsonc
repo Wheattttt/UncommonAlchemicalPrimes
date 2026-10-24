@@ -1,0 +1,89 @@
+{
+  "uncommonprimes": {
+    "": "Uncommon Primes",
+    "description": "Uncommon Primes adds many new sets of elements tied to the base elements - and allows campaigns to disable any of them as requested for maximum configurability.",
+    "atoms": {
+      "bellum": {
+        "": "Bellum",
+        "elemental": "Elemental Bellum"
+      },
+      "obscurum": {
+        "": "Obscurum",
+        "elemental": "Elemental Obscurum"
+      },
+      "lux": {
+        "": "Lux",
+        "elemental": "Elemental Lux"
+      },
+      "pax": {
+        "": "Pax",
+        "elemental": "Elemental Pax"
+      },
+      "platinum": {
+        "": "Platinum",
+        "elemental": "Elemental Platinum"
+      },
+      "cobalt": {
+        "": "Cobalt",
+        "elemental": "Elemental Cobalt"
+      },
+      "bismuth": {
+        "": "Bismuth",
+        "elemental": "Elemental Bismuth"
+      },
+      "nickel": {
+        "": "Nickel",
+        "elemental": "Elemental Nickel"
+      },
+      "zinc": {
+        "": "Zinc",
+        "elemental": "Elemental Zinc"
+      },
+      "arsenic": {
+        "": "Arsenic",
+        "elemental": "Elemental Arsenic"
+      }
+
+    },
+    "parts": {
+      "similarity": {
+        "": "Glyph of Similarity",
+        "description": "The glyph of similarity transmutes a salt atom into any of the ordinals, based on the two input cardinals."
+      },
+      "stability": {
+        "": "Glyph of Stability",
+        "description": "The glyph of stability takes two ordinals, converting them into their shared cardinal."
+      },
+      "osmosis": {
+        "": "Glyph of Osmosis",
+        "description": "The glyph of osmosis accepts two adjacent metals, equalizing them to their opposite-order product."
+      },
+      "dissolution": {
+        "": "Glyph of Dissolution",
+        "description": "The glyph of dissolution accepts two of the same metal, diverging them to their nearest opposite-order pair."
+      },
+      "exchange": {
+        "": "Glyph of Exchange",
+        "description": "The glyph of exchange demotes two metal atoms to their lower opposite-order neighbor, and promotes a third metal atom by 1 metallicity."
+      },
+      "fluxismus": {
+        "": "Glyph of Fluxismus",
+        "description": "The glyph of fluxismus transmutes two atoms of quicksilver into one atom of muto and one atom of fixus."
+      },
+      "servinwheel": {
+        "": "Servin's Wheel",
+        "description": "By using Servin's wheel with the glyph of Duplication, neutral salt can be turned into any of the ordinals."
+      }
+    },
+	"permission_sections": "Uncommon Primes",
+    "permissions": {
+      "similarity": "Glyph of Similarity",
+      "stability": "Glyph of Stability",
+      "osmosis": "Glyph of Osmosis",
+      "dissolution": "Glyph of Dissolution",
+      "exchange": "Glyph of Exchange",
+      "fluxismus": "Glyph of Fluxismus"
+    }
+
+  }
+}

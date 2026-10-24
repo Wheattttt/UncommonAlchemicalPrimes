@@ -1,82 +1,41 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net46</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace />
+    <AssemblyName>UncommonPrimes</AssemblyName>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
-  
-  <PropertyGroup>
-    <LangVersion>10</LangVersion>
-    <AutoGenerateBindingRedirects>True</AutoGenerateBindingRedirects>
-  </PropertyGroup>
+
+	<PropertyGroup>
+		<!-- Path to Opus Magnum folder, Contains Lightning.exe et.al -->
+		<OpusDir>E:\OMmoddingCE\Opus Magnum\modded</OpusDir>
+		<PlatformTarget>x64</PlatformTarget>
+	</PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="Brimstone">
-      <HintPath>..\Opus Magnum\Mods\Brimstone_2.3.0\Brimstone.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightning">
-      <HintPath>..\Opus Magnum\ModdedLightning.exe</HintPath>
-    </Reference>
-    <Reference Include="MMHOOK_ModdedLightning">
-      <HintPath>..\Opus Magnum\MMHOOK_ModdedLightning.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightning">
-      <HintPath>..\Opus Magnum\ModdedLightning.exe</HintPath>
+    <Reference Include="DevLightning_UAP">
+      <HintPath>$(OpusDir)\DevLightning_UAP.dll</HintPath>
+      <Private>false</Private>
+      <CopyLocal>False</CopyLocal>
     </Reference>
     <Reference Include="Mono.Cecil">
-      <HintPath>..\Opus Magnum\Mono.Cecil.dll</HintPath>
+      <HintPath>$(OpusDir)\Mono.Cecil.dll</HintPath>
+      <CopyLocal>False</CopyLocal>
     </Reference>
     <Reference Include="MonoMod">
-      <HintPath>..\Opus Magnum\MonoMod.exe</HintPath>
-    </Reference>
-    <Reference Include="MonoMod.RuntimeDetour">
-      <HintPath>..\Opus Magnum\MonoMod.RuntimeDetour.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoMod.RuntimeDetour.HookGen">
-      <HintPath>..\Opus Magnum\MonoMod.RuntimeDetour.HookGen.exe</HintPath>
+      <HintPath>$(OpusDir)\MonoMod.Patcher.dll</HintPath>
+      <CopyLocal>False</CopyLocal>
     </Reference>
     <Reference Include="MonoMod.Utils">
-      <HintPath>..\Opus Magnum\MonoMod.Utils.dll</HintPath>
-    </Reference>
-	<Reference Include="ReductiveMetallurgy">
-	  <HintPath>..\Opus Magnum\Mods\ReductiveMetallurgy_1.0.1\ReductiveMetallurgy.dll</HintPath>
-	</Reference>
-	<Reference Include="TrueAnimismus">
-	  <HintPath>..\Opus Magnum\Mods\TrueAn_1.0.6\TrueAn.dll</HintPath>
-	</Reference>
-	<Reference Include="Vacancy">
-	  <HintPath>..\Opus Magnum\Mods\Vaca_1.0.1\Vaca.dll</HintPath>
-	</Reference>
-    <Reference Include="YamlDotNet">
-      <HintPath>..\Opus Magnum\YamlDotNet.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Update="System">
-      <CopyLocal>False</CopyLocal>
-    </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Update="System.Core">
-      <CopyLocal>False</CopyLocal>
-    </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Update="System.Data">
-      <CopyLocal>False</CopyLocal>
-    </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Update="System.Drawing">
+      <HintPath>$(OpusDir)\MonoMod.Utils.dll</HintPath>
       <CopyLocal>False</CopyLocal>
     </Reference>
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy /Y &quot;..\UncommonPrimes\bin\Debug\net46\UncommonPrimes.dll&quot; &quot;..\Opus Magnum\Mods\UncommonAlchemicalPrimes\UncommonPrimes.dll&quot; &amp;&amp; cd /d &quot;..\Opus Magnum&quot; &amp;&amp; ModdedLightning.exe" />
+    <Exec Command="copy /Y &quot;$(OpusDir)\Mods\UncommonAlchemicalPrimes\bin\Debug\net10.0\UncommonPrimes.dll&quot; &quot;$(OpusDir)\Mods\UncommonAlchemicalPrimes\UncommonPrimes.dll&quot; &amp;&amp; cd /d &quot;E:\OMmoddingCE\Opus Magnum&quot; &amp;&amp; OpusMutatum.exe" />
   </Target>
 
 </Project>
