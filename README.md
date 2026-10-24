@@ -1,0 +1,52 @@
+Uncommon Alchemical Primes adds many extra elements to play around with.
+
+## **THE ORDINALS**  
+<img width="454" height="470" alt="image" src="https://github.com/user-attachments/assets/a443af77-86f7-4b91-af5e-e386ae3ac915" />
+
+The Ordinals, pictured above, are special elements that can be calcified and duplicated just like Cardinals, and exist between them.  
+The **Glyph of Similarity** will transmute an atom of Salt resting in the bowl, to whichever Ordinal is shared by the two Cardinal Elements in the input bowls.  
+The **Glyph of Stability** will transmute two Ordinals into their shared Cardinal, or Salt if the Ordinals are opposed.  
+  
+While it may seem like they are "composite" elements of their neighboring cardinal elements, the opposite is true. The Ordinals represent traits their adjacent Cardinals have in common.
+The ordinals are typically rare in nature, as they represent more abstract traits than the much more common cardinals. While their behaviors are quite interpretable, Bellum/Pax tend to represent chaos/stillness and rising/falling (Fire and Air are chaotic and light, Water and Earth are still and heavy), whereas Lux/Obscurum tend to represent light/dark and growth/stagnation (Fire and Earth grow, albeit in different ways, Air and Water both create darkness and fog). 
+
+  
+  
+## **THE SECOND-ORDER METALS**
+<img width="337" height="650" alt="image" src="https://github.com/user-attachments/assets/413950cd-53c3-41c9-886d-824e72ce5d29" />
+
+The Second-Order Metals, pictured above, are a group of five new metals that exist alongside the original metals of antiquity.  
+The **Glyph of Osmosis** will take two adjacent metals (For example, Silver and Copper), and convert them to their shared opposite-order metal (two atoms of Cobalt).  
+The **Glyph of Dissolution** is a similar transmutation, but in reverse. It will take two of the same metal (For example, two atoms of Iron), and convert them to their opposite order neighbors (Bismuth and Nickel).
+Both of these glyphs can take in either base metals, or Second-Order Metals.  
+The **Glyph of Exchange** takes in two metal atoms as input, and a third metal atom in a bowl. The two input metals will be processed into their lower opposite-order neighbor (i.e. Nickel -> Tin, Copper -> Bismuth) while the metal in the bowl will be fully promoted (Silver -> Gold, Zinc -> Nickel). These three inputs can be any combination of metals or Second-Order Metals. 
+Second-Order Metals are fragile, and break down lossily into basemetals when put through the Glyph of Division/Deposition. For example, Cobalt (Effectively 4.5) divides into x2 Tin (2 + 2).
+
+## **FLUXISMUS**
+<img width="332" height="287" alt="image" src="https://github.com/user-attachments/assets/cda571fb-563c-4757-abea-1d4295b09a4f" />
+
+The Fluxismus atoms are akin to the process of Animismus, but applied to Quicksilver as opposed to Salt.  
+Muto and Fixus represent the positive and negative aspect of change respectively.
+The **Glyph of Fluxismus** will take two quicksilver, producing an atom of Muto and an atom of Fixus.
+
+
+## **CAMPAIGN SUPPORT**
+This mod is designed around supported use in campaigns. Any of the above atom groups can be disabled by your campaign by putting the following lines in your campaign's load method:  
+``UncommonPrimes.API.OrdinalsEnabled = false;`` will disable the Ordinals, and their glyphs.  
+``UncommonPrimes.API.SecondOrderMetalsEnabled = false;`` will disable the Second-Order Metals, and their glyphs.  
+``UncommonPrimes.API.FluxismusEnabled = false;`` will disable the Fluxismus Atoms, and their glyphs.  
+This also hides said atoms from the periodic table.  
+
+## **DEPENDENCIES [CE]**
+If using v1.0.0 or above:
+This mod requires [Quintessential v0.9.0](https://github.com/QuintessentialOM/Quintessential/releases/tag/v0.9.0).
+Currently, there is no additional compatibility with external mods (True Animismus, Vacancy), as said external mods do not exist for this version yet.
+
+## **DEPENDENCIES [OLD]**
+If using any version older than v1.0.0:
+
+This mod requires [Quintessential](https://github.com/ErikHaag/Quintessential/releases/tag/v0.5.4) and [Brimstone](https://github.com/ErikHaag/Brimstone/releases/tag/2.0.2).
+
+Additionally, the Second-Order Metals are compatible with [Reductive Metallurgy](https://github.com/icwass/ReductiveMetallurgy/releases/tag/v1.0.1), which is recommended as well.  
+Fluxismus has combatibility with [True Animismus](https://github.com/ItsKazyan/TrueAn/releases/tag/bugfix1.0.5), however the disposal jack cannot be used on the Glyph of Fluxismus.
+The Second-Order Metals have compatibility with [Vacancy (Discord Link)](https://discord.com/channels/278707932089155584/1238621882652033094/1244388366133493781), creating a new metal "Arsenic" between Vaca and Lead.
