@@ -1,9 +1,5 @@
-﻿using MonoMod.Utils;
-using Quintessential;
+﻿using Quintessential;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using static Quintessential.PartCycleDelegate;
 
 namespace UncommonPrimes;
@@ -148,8 +144,8 @@ internal static class Parts
             isFullHexCover = true, // Is a glyph
             glowTexture = Assets.textures.select.triple_glow,
             strokeTexture = Assets.textures.select.triple_stroke,
-            baseTexture = similarityIcon, // Panel icon
-            hoverTexture = similarityHover, // Hovered panel icon
+            iconTexture = similarityIcon, // Panel icon
+            iconHoverTexture = similarityHover, // Hovered panel icon
             glyphHexes = new HexIndex[]
             {
                 similarityInput1,
@@ -178,8 +174,8 @@ internal static class Parts
             isFullHexCover = true, // Is a glyph
             glowTexture = Assets.textures.select.double_glow,
             strokeTexture = Assets.textures.select.double_stroke,
-            baseTexture = stabilityIcon, // Panel icon
-            hoverTexture = stabilityHover, // Hovered panel icon
+            iconTexture = stabilityIcon, // Panel icon
+            iconHoverTexture = stabilityHover, // Hovered panel icon
             glyphHexes = new HexIndex[]
             {
                 stabilityOrdinal1Hex,
@@ -206,8 +202,8 @@ internal static class Parts
             isFullHexCover = true, // Is a glyph
             glowTexture = osmosisGlow,
             strokeTexture = osmosisStroke,
-            baseTexture = osmosisIcon, // Panel icon
-            hoverTexture = osmosisHover, // Hovered panel icon
+            iconTexture = osmosisIcon, // Panel icon
+            iconHoverTexture = osmosisHover, // Hovered panel icon
             glyphHexes = new HexIndex[]
             {
                 osmosisInputHigh,
@@ -267,8 +263,8 @@ internal static class Parts
             isFullHexCover = true, // Is a glyph
             glowTexture = dissolutionGlow,
             strokeTexture = dissolutionStroke,
-            baseTexture = dissolutionIcon, // Panel icon
-            hoverTexture = dissolutionHover, // Hovered panel icon
+            iconTexture = dissolutionIcon, // Panel icon
+            iconHoverTexture = dissolutionHover, // Hovered panel icon
             glyphHexes = new HexIndex[]
             {
                     dissolutionInput1,
@@ -329,8 +325,8 @@ internal static class Parts
             isFullHexCover = true, // Is a glyph
             glowTexture = exchangeGlow,
             strokeTexture = exchangeStroke,
-            baseTexture = exchangeIcon, // Panel icon
-            hoverTexture = exchangeHover, // Hovered panel icon
+            iconTexture = exchangeIcon, // Panel icon
+            iconHoverTexture = exchangeHover, // Hovered panel icon
             glyphHexes = new HexIndex[]
             {
                     exchangeBowl,
@@ -393,8 +389,8 @@ internal static class Parts
             isFullHexCover = true, // Is a glyph
             glowTexture = fluxismusGlow,
             strokeTexture = fluxismusStroke,
-            baseTexture = fluxismusIcon, // Panel icon
-            hoverTexture = fluxismusHover, // Hovered panel icon
+            iconTexture = fluxismusIcon, // Panel icon
+            iconHoverTexture = fluxismusHover, // Hovered panel icon
             glyphHexes = new HexIndex[]
             {
                     fluxismusInput1,

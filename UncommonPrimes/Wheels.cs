@@ -1,10 +1,5 @@
-﻿using MonoMod.Utils;
-using Quintessential;
-using System;
+﻿using Quintessential;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using static Quintessential.PartCycleDelegate;
 
 namespace UncommonPrimes;
 
@@ -18,8 +13,8 @@ internal static class Wheels
     {
         ServinWheel = new PartType
         {
-            baseTexture = servinIcon, // Panel icon
-            hoverTexture = servinHover, // Hovered panel icon
+            iconTexture = servinIcon, // Panel icon
+            iconHoverTexture = servinHover, // Hovered panel icon
             cost = 30,
             isUnique = true,
             layer = PartTypeLayer.Top,
