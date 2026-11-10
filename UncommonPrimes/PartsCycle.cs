@@ -1,15 +1,5 @@
-﻿using MonoMod.Utils;
-using UncommonPrimes;
-using Quintessential;
-using System;
+﻿using Quintessential;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Reflection.Metadata.Ecma335;
-using System.Threading;
-using static Quintessential.Internal.LegacyPuzzleModel;
-using static Quintessential.PartCycleDelegate;
-using static StringLoader;
-using static TextureAssets;
 
 namespace UncommonPrimes;
 
@@ -18,7 +8,7 @@ internal static class PartsCycle
     public static void AddAtom(Sim sim, Part part, HexIndex offset, AtomType atomType)
     {
         Molecule molecule = new();
-        molecule.AddAtom(new Atom(atomType), part.InFrontBy(offset));
+        molecule.AddAtom(new Atom(atomType), part.GlobalPosFromLocal(offset));
         sim.molecules.Add(molecule);
     }
     public static void RemoveAtom(AtomReference atom) => atom.molecule.RemoveAtom(atom.pos);
@@ -38,9 +28,9 @@ internal static class PartsCycle
                 {
                     ChangeAtom(atomOutput, recipe.output);
                     atomOutput.atom.transmutationEffect = new TransmutationEffect(sim.solutionEditor, (TransmutationEffectRenderMode)1, atomOutput.atomType, Assets.textures.atoms.projection_effect, 30f);
-                    Vector2 centerVec = HexGrid.standardGrid.ToPixelCoords(part.InFrontBy(Parts.similarityOutput));
+                    Vector2 centerVec = HexGrid.standardGrid.ToPixelCoords(part.GlobalPosFromLocal(Parts.similarityOutput));
                     sim.solutionEditor.glyphEffects.Add(new GlyphEffect(sim.solutionEditor, (EffectTimescaleType)1, centerVec, Parts.similarityFlashAnimation, 30f, Vector2.Zero, 0));
-                    Sounds.glyph_similarity.PlaySound(sim.solutionEditor.method_506());
+                    Sounds.glyph_similarity.PlaySound(sim.solutionEditor.GetVolumeMultiplier());
                     return true;
 
                 }
@@ -63,7 +53,7 @@ internal static class PartsCycle
                     OrdinalAtom1.atom.transmutationEffect = new TransmutationEffect(sim.solutionEditor, (TransmutationEffectRenderMode)1, OrdinalAtom1.atomType, Assets.textures.atoms.projection_effect, 30f);
                     ChangeAtom(OrdinalAtom2, recipe.output);
                     OrdinalAtom2.atom.transmutationEffect = new TransmutationEffect(sim.solutionEditor, (TransmutationEffectRenderMode)1, OrdinalAtom2.atomType, Assets.textures.atoms.projection_effect, 30f);
-                    Sounds.glyph_similarity.PlaySound(sim.solutionEditor.method_506());
+                    Sounds.glyph_similarity.PlaySound(sim.solutionEditor.GetVolumeMultiplier());
                     return true;
 
                 }
@@ -95,7 +85,7 @@ internal static class PartsCycle
                                 sim.solutionEditor.consumptionEffects.Add(new ConsumptionEffect(sim.solutionEditor, new AtomReference[] { HighMetal }));
                                 simState.isProcessing = true;
                                 simState.processingAtoms = new AtomType[1] { recipe.output };
-                                Sounds.glyph_osmosis.PlaySound(sim.solutionEditor.method_506());
+                                Sounds.glyph_osmosis.PlaySound(sim.solutionEditor.GetVolumeMultiplier());
                                 return true;
                             }
                         }
@@ -135,7 +125,7 @@ internal static class PartsCycle
                                 sim.solutionEditor.consumptionEffects.Add(new ConsumptionEffect(sim.solutionEditor, new AtomReference[] { InputMetal2 }));
                                 simState.isProcessing = true;
                                 simState.processingAtoms = new AtomType[2] { recipe.lowinput, recipe.highinput };
-                                Sounds.glyph_dissolution.PlaySound(sim.solutionEditor.method_506());
+                                Sounds.glyph_dissolution.PlaySound(sim.solutionEditor.GetVolumeMultiplier());
                                 return true;
                             }
                         }
@@ -197,7 +187,7 @@ internal static class PartsCycle
                             sim.solutionEditor.consumptionEffects.Add(new ConsumptionEffect(sim.solutionEditor, new AtomReference[] { InputMetalRight }));
                             simState.isProcessing = true;
                             simState.processingAtoms = new AtomType[2] { leftAtom, rightAtom };
-                            Sounds.glyph_dissolution.PlaySound(sim.solutionEditor.method_506());
+                            Sounds.glyph_dissolution.PlaySound(sim.solutionEditor.GetVolumeMultiplier());
                             return true;
                         }
                     }
@@ -236,7 +226,7 @@ internal static class PartsCycle
                                 sim.solutionEditor.consumptionEffects.Add(new ConsumptionEffect(sim.solutionEditor, new AtomReference[] { Input2 }));
                                 simState.isProcessing = true;
                                 simState.processingAtoms = new AtomType[2] { recipe.output_lo, recipe.output_hi };
-                                Sounds.glyph_dissolution.PlaySound(sim.solutionEditor.method_506());
+                                Sounds.glyph_dissolution.PlaySound(sim.solutionEditor.GetVolumeMultiplier());
                                 return true;
                             }
                         }
